@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class Estabelecimento {
 	
 	@Column(name="nome")
-	private String nome;
+	private String nomeProprietario;
 	
 	@Column(name="estabelecimento")
 	private String estabelecimento;
@@ -26,17 +26,17 @@ public class Estabelecimento {
 	
 	@Column(name="senha")
 	private String senha;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 
-	public String getNome() {
-		return nome;
+	public String getNomeProprietario() {
+		return nomeProprietario;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeProprietario(String nome) {
+		this.nomeProprietario = nome;
 	}
 
 	public String getEstabelecimento() {

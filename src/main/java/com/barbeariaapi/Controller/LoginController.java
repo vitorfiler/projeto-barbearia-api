@@ -32,18 +32,17 @@ public class LoginController {
 	LoginService loginService;
 	
 	@PostMapping("/login")
-	public Login login(@RequestBody Map<String, String> parametros) {
+	public ResponseEntity<Login> login(@RequestBody Map<String, String> parametros) {
 		String nomeUsuario = parametros.get("username");
 		String senha = parametros.get("password");
-//		Estabelecimento estabelecimento = loginService.loadUserByUsername(nomeUsuario);
-//		if(estabelecimento != null) {
-			String token = getJWTToken(parametros.get("username"));
-			Login user = new Login();
-			user.setNomeUsuario(parametros.get("username"));
-			user.setToken(token);		
-			return user;
-//		}
-//		return new ResponseEntity("Usuário ou senha não encontrados", HttpStatus.BAD_REQUEST);
+		Estabelecimento estabelecimento = loginService.loadUserByUsername(nomeUsuario, senha);
+		String token = getJWTToken(parametros.get("username"));
+		Login user = new Login();
+		user.setToken(token);		
+		user.setEstabelecimento(estabelecimento.getEstabelecimento());
+		user.setEmail(estabelecimento.getEmail());
+		user.setNomeProprietario(estabelecimento.getNomeProprietario());
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	private String getJWTToken(String username) {

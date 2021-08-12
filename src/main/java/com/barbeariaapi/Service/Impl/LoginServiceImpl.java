@@ -17,11 +17,16 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	EstabelecimentoRepository estabelecimentoRepository;
 	
-	public Estabelecimento loadUserByUsername(String username) throws UsernameNotFoundException {
+	public Estabelecimento loadUserByUsername(String username, String password) throws UsernameNotFoundException {
 		Estabelecimento estabelecimento = estabelecimentoRepository.findByEmail(username);
-		if (estabelecimento.getEmail().equals(username)) {
-			return estabelecimento;
-		} else {
+		if(estabelecimento != null) {			
+			if (estabelecimento.getEmail().equals(username) && estabelecimento.getSenha().equals(password) ) {
+				return estabelecimento;
+			} else {
+				throw new UsernameNotFoundException("User not found with username: " + username);
+			}
+		}
+		else {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
 	}
