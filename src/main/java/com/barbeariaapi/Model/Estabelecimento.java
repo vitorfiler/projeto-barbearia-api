@@ -81,4 +81,8 @@ public class Estabelecimento {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public Estabelecimento(Estabelecimento user) {
+		// TODO Auto-generated constructor stub
+	}
 }
