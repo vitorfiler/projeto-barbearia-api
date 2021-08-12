@@ -10,6 +10,6 @@ import com.barbeariaapi.Model.Estabelecimento;
 @Repository
 public interface EstabelecimentoRepository extends JpaRepository <Estabelecimento, Long> {
 
-	Optional<Estabelecimento> findByEmail (String usuario);
+	Estabelecimento findByEmail (String usuario);
 
 }

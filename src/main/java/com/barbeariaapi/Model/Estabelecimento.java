@@ -1,5 +1,7 @@
 package com.barbeariaapi.Model;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -82,7 +84,7 @@ public class Estabelecimento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estabelecimento(Estabelecimento user) {
+	public Estabelecimento(String string, String string2, ArrayList arrayList) {
 		// TODO Auto-generated constructor stub
 	}
 }

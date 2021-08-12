@@ -22,19 +22,20 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import com.barbeariaapi.Model.Estabelecimento;
 import com.barbeariaapi.Model.Login;
 import com.barbeariaapi.Repository.EstabelecimentoRepository;
+import com.barbeariaapi.Service.LoginService;
 
 
 @RestController
 public class LoginController {
 	
 	@Autowired
-	EstabelecimentoRepository estabelecimentoRepository;
+	LoginService loginService;
 	
 	@PostMapping("/login")
 	public Login login(@RequestBody Map<String, String> parametros) {
 		String nomeUsuario = parametros.get("username");
 		String senha = parametros.get("password");
-//		Estabelecimento estabelecimento = autenticar(nomeUsuario, senha);
+//		Estabelecimento estabelecimento = loginService.loadUserByUsername(nomeUsuario);
 //		if(estabelecimento != null) {
 			String token = getJWTToken(parametros.get("username"));
 			Login user = new Login();
@@ -43,12 +44,6 @@ public class LoginController {
 			return user;
 //		}
 //		return new ResponseEntity("Usuário ou senha não encontrados", HttpStatus.BAD_REQUEST);
-	}
-	
-	public Estabelecimento autenticar(String usuario, String senha) throws UsernameNotFoundException {
-		Estabelecimento user = estabelecimentoRepository.findByEmail(usuario)
-				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com e-mail informado"));
-		return new Estabelecimento(user);
 	}
 	
 	private String getJWTToken(String username) {
@@ -71,4 +66,11 @@ public class LoginController {
 
 		return "Bearer " + token;
 	}
+	
+	
+//	public Estabelecimento autenticar(String usuario, String senha) throws UsernameNotFoundException {
+//		Estabelecimento user = estabelecimentoRepository.findByEmail(usuario)
+//				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com e-mail informado"));
+//		return new Estabelecimento(user);
+//	}
 }
