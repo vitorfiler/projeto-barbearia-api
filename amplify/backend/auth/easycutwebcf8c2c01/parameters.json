@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "easycutweb_identitypool_084b7063",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "easycu084b7063",
-    "userPoolName": "easycutweb_userpool_084b7063",
+    "identityPoolName": "easycutwebcf8c2c01_identitypool_cf8c2c01",
+    "allowUnauthenticatedIdentities": true,
+    "resourceNameTruncated": "easycucf8c2c01",
+    "userPoolName": "easycutwebcf8c2c01_userpool_cf8c2c01",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,7 +20,9 @@
     "requiredAttributes": [
         "email"
     ],
-    "aliasAttributes": [],
+    "aliasAttributes": [
+        "email"
+    ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -29,11 +31,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "easycu084b7063_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "easycucf8c2c01_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
+    "sharedId": "cf8c2c01",
+    "resourceName": "easycutwebcf8c2c01",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "cognito084b7063",
-    "sharedId": "084b7063",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -45,5 +47,10 @@
             "UnauthRole",
             "Arn"
         ]
-    }
+    },
+    "useDefault": "default",
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "usernameCaseSensitive": false,
+    "dependsOn": []
 }

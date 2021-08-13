@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name="Estabelecimento")
 public class Estabelecimento {
 	
 	@Column(name="nome")
@@ -21,15 +21,15 @@ public class Estabelecimento {
 	@Column(name="email")
 	private String email;
 	
-	@Column(name="cpf_cnpj")
+	@Column(name="CPF_CNPJ")
 	private String cpf_cnpj;
 	
 	@Column(name="senha")
 	private String senha;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	public String getNomeProprietario() {
 		return nomeProprietario;
@@ -71,11 +71,11 @@ public class Estabelecimento {
 		this.senha = senha;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

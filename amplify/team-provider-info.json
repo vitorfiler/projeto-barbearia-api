@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "cognito084b7063": {}
+        "cognito084b7063": {},
+        "easycutwebcf8c2c01": {}
       }
     }
   }

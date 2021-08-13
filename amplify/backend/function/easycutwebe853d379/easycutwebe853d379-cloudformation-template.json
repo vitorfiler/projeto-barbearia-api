@@ -49,13 +49,13 @@
             "FunctionName": {
                 "Fn::If": [
                     "ShouldNotCreateEnvResources",
-                    "easycutwebeed5a1ca",
+                    "easycutwebe853d379",
                     {
 
                         "Fn::Join": [
                             "",
                             [
-                                "easycutwebeed5a1ca",
+                                "easycutwebe853d379",
                                 "-",
                                 {
                                     "Ref": "env"
@@ -80,13 +80,13 @@
                 "RoleName": {
                     "Fn::If": [
                         "ShouldNotCreateEnvResources",
-                        "easycutwebLambdaRole2513c12e",
+                        "easycutwebLambdaRolea133ccda",
                         {
 
                             "Fn::Join": [
                                 "",
                                 [
-                                    "easycutwebLambdaRole2513c12e",
+                                    "easycutwebLambdaRolea133ccda",
                                     "-",
                                     {
                                         "Ref": "env"

@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/login",
+      "lambdaFunction": "easycutweb50e55a40",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/login"
+    }
+  ],
+  "resourceName": "api25f66b34",
+  "apiName": "api25f66b34",
+  "functionArns": [
+    {
+      "lambdaFunction": "easycutweb50e55a40"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-easycutweb-dev-141403-authRole",
+    "unAuthRoleName": "amplify-easycutweb-dev-141403-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "easycutweb50e55a40",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

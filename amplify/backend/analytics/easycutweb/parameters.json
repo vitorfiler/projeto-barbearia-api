@@ -1,0 +1,21 @@
+{
+    "appName": "easycutweb",
+    "roleName": "pinpointLambdaRole63e526db",
+    "cloudformationPolicyName": "cloudformationPolicy63e526db",
+    "cloudWatchPolicyName": "cloudWatchPolicy63e526db",
+    "pinpointPolicyName": "pinpointPolicy63e526db",
+    "authPolicyName": "pinpoint_amplify_63e526db",
+    "unauthPolicyName": "pinpoint_amplify_63e526db",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

@@ -40,7 +40,7 @@ public class LoginController {
 		Login user = new Login();
 		user.setToken(token);		
 		user.setEstabelecimento(estabelecimento.getEstabelecimento());
-		user.setEmail(estabelecimento.getEmail());
+//		user.setEmail(estabelecimento.getEmail());
 		user.setNomeProprietario(estabelecimento.getNomeProprietario());
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
