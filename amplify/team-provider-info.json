@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-easycutweb-dev-141403-authRole",
+      "UnauthRoleArn": "arn:aws:iam::142785316374:role/amplify-easycutweb-dev-141403-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::142785316374:role/amplify-easycutweb-dev-141403-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-easycutweb-dev-141403-deployment",
+      "UnauthRoleName": "amplify-easycutweb-dev-141403-unauthRole",
+      "StackName": "amplify-easycutweb-dev-141403",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:142785316374:stack/amplify-easycutweb-dev-141403/e0243410-fc59-11eb-b42f-023477035e84",
+      "AmplifyAppId": "d3nueedqdpdx5m"
+    },
+    "categories": {
+      "auth": {
+        "cognito084b7063": {}
+      }
+    }
+  }
+}

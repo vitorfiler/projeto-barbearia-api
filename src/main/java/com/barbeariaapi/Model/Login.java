@@ -3,9 +3,9 @@ package com.barbeariaapi.Model;
 public class Login {
 	
 	private String estabelecimento;
-	private String token;
 	private String email;
 	private String nomeProprietario;
+	private String token;
 	
 	public String getNomeProprietario() {
 		return nomeProprietario;
