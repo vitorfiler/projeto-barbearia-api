@@ -12,4 +12,6 @@ public interface EstabelecimentoService {
 	
 	public Optional<Estabelecimento> buscarEstabelecimentoPeloId(Long id);
 	
+	public String recuperarSenha(String email);
+	
 }
