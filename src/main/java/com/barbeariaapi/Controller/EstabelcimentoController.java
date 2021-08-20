@@ -30,8 +30,14 @@ public class EstabelcimentoController {
 		return new ResponseEntity<>(estabelecimento, HttpStatus.OK);
 	}
 	
-	@GetMapping("/senha")
-	public ResponseEntity<String> recuperarSenha(@RequestParam(name = "email") String email){
+	@PutMapping("/redefinir-senha")
+	public ResponseEntity<String> redefinirSenha(@RequestBody Map<String, String> parametros){
+		String status = estabelecimentoService.redefinirSenha(parametros);
+		return new ResponseEntity<>(status, HttpStatus.OK);
+	}
+	
+	@GetMapping("/recuperar-senha")
+	public ResponseEntity<Map<String, String>> recuperarSenha(@RequestParam(name = "email") String email){
 		return new ResponseEntity<>(estabelecimentoService.recuperarSenha(email), HttpStatus.OK);
 	}
 	

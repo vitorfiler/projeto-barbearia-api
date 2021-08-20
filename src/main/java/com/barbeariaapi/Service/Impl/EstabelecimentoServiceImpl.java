@@ -1,14 +1,24 @@
 package com.barbeariaapi.Service.Impl;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
 import com.barbeariaapi.Model.Estabelecimento;
 import com.barbeariaapi.Repository.EstabelecimentoRepository;
 import com.barbeariaapi.Service.EstabelecimentoService;
 import com.barbeariaapi.utis.EmailUtils;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component("EstabelcimentoController")
 public class EstabelecimentoServiceImpl implements EstabelecimentoService{
@@ -25,8 +35,51 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	}
 
 	
-	public String recuperarSenha(String email) {
+	public Map<String, String> recuperarSenha(String email) {
+		Map<String, String> parametros = new HashMap<>();
 		Estabelecimento estabelecimento = estabelecimentoRepository.findByEmail(email);
-		return estabelecimento != null? EmailUtils.enviarEmail(email) : "Email não encontrado no sistema!";
+		if(estabelecimento != null) {
+			EmailUtils.enviarEmail(email);
+			parametros.put("status", "Email enviado com sucesso!");
+			parametros.put("hash", gerarHashRecuperacao(email));
+		}else {
+			parametros.put(email, "Email não encontrado no sistema!");
+		}
+		
+		return parametros;
+	}	
+	
+	public String redefinirSenha(Map<String, String> parametros) {
+		String senha  = parametros.get("password");
+		String email  = parametros.get("email");
+		Estabelecimento estabelecimento = estabelecimentoRepository.findByEmail(email);
+		if(estabelecimento != null) {
+			estabelecimento.setSenha(senha);
+			estabelecimentoRepository.save(estabelecimento);
+			return "Senha alterada com sucesso!";
+		}else {
+			return "Falha ao alterar senha!";
+		}
+	}
+	
+	private String gerarHashRecuperacao(String username) {
+		String secretKey = "mySecretKey";
+		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+				.commaSeparatedStringToAuthorityList("ROLE_USER");
+		
+		String hash = Jwts
+				.builder()
+				.setId("softtekJWT")
+				.setSubject(username)
+				.claim("authorities",
+						grantedAuthorities.stream()
+								.map(GrantedAuthority::getAuthority)
+								.collect(Collectors.toList()))
+				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + 600000))
+				.signWith(SignatureAlgorithm.HS512,
+						secretKey.getBytes()).compact();
+
+		return hash;
 	}
 }

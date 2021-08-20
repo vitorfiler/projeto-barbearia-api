@@ -16,7 +16,7 @@ public class EmailUtils {
 	public static String enviarEmail(String email) {
 		 String to = email;
 		    String subject = "Recuperação de Senha";
-		    String msg ="<h1>Clique no link para redefinir sua senha: </h1> </br> <h3>https://master.d3nueedqdpdx5m.amplifyapp.com</h3>";
+		    String msg ="<h1>Clique no link para redefinir sua senha: </h1> </br> <h3>http://easycutapp.s3-website-sa-east-1.amazonaws.com/recuperar-senha</h3>";
 		    final String from ="vitordev.macedo@gmail.com";
 		    final  String password ="wehpxindwjtjcevo";
 
