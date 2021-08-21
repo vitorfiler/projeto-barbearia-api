@@ -7,24 +7,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity(name="Estabelecimento")
 public class Estabelecimento {
 	
 	@Column(name="nome")
+	@NotNull
+	@Size(min = 3, max = 100)
 	private String nomeProprietario;
 	
 	@Column(name="estabelecimento")
+	@NotNull
+	@Size(min = 3, max = 100)
 	private String estabelecimento;
 	
 	@Column(name="email")
+	@NotNull
+	@Size(min = 3, max = 100)
 	private String email;
 	
 	@Column(name="CPF_CNPJ")
+	@NotNull
+	@Size(min = 3, max = 100)
 	private String cpf_cnpj;
 	
 	@Column(name="senha")
+	@NotNull
+	@Size(min = 3, max = 100)
 	private String senha;
 
 	@Id

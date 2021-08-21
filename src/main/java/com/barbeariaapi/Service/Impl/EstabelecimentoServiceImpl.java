@@ -8,9 +8,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.barbeariaapi.Model.Estabelecimento;
 import com.barbeariaapi.Repository.EstabelecimentoRepository;
@@ -27,7 +29,12 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	EstabelecimentoRepository estabelecimentoRepository;
 	
 	public void cadastrarEstabelecimento(Estabelecimento estabelecimento) {
-		estabelecimentoRepository.save(estabelecimento);
+		Estabelecimento estabelecimentoExistente = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
+		if(estabelecimentoExistente == null) {			
+			estabelecimentoRepository.save(estabelecimento);
+		}else {			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	public Optional<Estabelecimento> buscarEstabelecimentoPeloId(Long id) {

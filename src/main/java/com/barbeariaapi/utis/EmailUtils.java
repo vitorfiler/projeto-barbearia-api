@@ -37,16 +37,6 @@ public class EmailUtils {
 	    		return new PasswordAuthentication(from,password);  
 	    	}  
 	    });
-//	    Session session = Session.getDefaultInstance(props,
-//	    	    new javax.mail.Authenticator() {
-//	    	        protected PasswordAuthentication  getPasswordAuthentication() {
-//	    	        return new PasswordAuthentication(
-//	    	        		"vitordev.macedo@gmail.com", "wehpxindwjtjcevo");
-//	    	                }
-//	    	    });
-
-//	    		session = Session.getInstance(props); // this is the local variable not the instance one
-//	    return new PasswordAuthentication();
 
 	    try {
 

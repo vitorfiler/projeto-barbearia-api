@@ -3,6 +3,8 @@ package com.barbeariaapi.Controller;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class EstabelcimentoController {
 	EstabelecimentoService estabelecimentoService;
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Estabelecimento> cadastrarEstabelecimento(@RequestBody Estabelecimento estabelecimento){
+	public ResponseEntity<Estabelecimento> cadastrarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento){
 		estabelecimentoService.cadastrarEstabelecimento(estabelecimento);
 		return new ResponseEntity<>(estabelecimento, HttpStatus.OK);
 	}
