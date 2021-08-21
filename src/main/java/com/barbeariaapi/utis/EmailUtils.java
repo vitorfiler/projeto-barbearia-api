@@ -53,8 +53,6 @@ public class EmailUtils {
 	    	   transport.connect();  
 	    	   Transport.send(message, from, password);  
 	    	   transport.close();
-	    	   
-	      System.out.println("Feito!!!");
 
 	     } catch (MessagingException e) {
 	        throw new RuntimeException(e);

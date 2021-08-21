@@ -13,6 +13,9 @@ import javax.validation.constraints.Size;
 @Entity(name="Estabelecimento")
 public class Estabelecimento {
 	
+	@Column(name="hashSenha")
+	private String hashSenha;
+	
 	@Column(name="nome")
 	@NotNull
 	@Size(min = 3, max = 100)
@@ -41,6 +44,14 @@ public class Estabelecimento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	public String getHashSenha() {
+		return hashSenha;
+	}
+
+	public void setHashSenha(String hashSenha) {
+		this.hashSenha = hashSenha;
+	}
 
 	public String getNomeProprietario() {
 		return nomeProprietario;
