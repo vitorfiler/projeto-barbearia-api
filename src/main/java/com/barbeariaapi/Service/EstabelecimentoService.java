@@ -9,7 +9,7 @@ import com.barbeariaapi.Model.Estabelecimento;
 
 @Service
 public interface EstabelecimentoService {
-	public void cadastrarEstabelecimento(Estabelecimento estabelecimento);
+	public void cadastrarEstabelecimento(Estabelecimento estabelecimento) throws Exception;
 	
 	public Optional<Estabelecimento> buscarEstabelecimentoPeloId(Long id);
 	

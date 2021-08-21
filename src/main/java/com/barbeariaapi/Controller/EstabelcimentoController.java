@@ -27,7 +27,7 @@ public class EstabelcimentoController {
 	EstabelecimentoService estabelecimentoService;
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Estabelecimento> cadastrarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento){
+	public ResponseEntity<Estabelecimento> cadastrarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento) throws Exception{
 		estabelecimentoService.cadastrarEstabelecimento(estabelecimento);
 		return new ResponseEntity<>(estabelecimento, HttpStatus.OK);
 	}

@@ -28,12 +28,12 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	@Autowired
 	EstabelecimentoRepository estabelecimentoRepository;
 	
-	public void cadastrarEstabelecimento(Estabelecimento estabelecimento) {
+	public void cadastrarEstabelecimento(Estabelecimento estabelecimento) throws Exception {
 		Estabelecimento estabelecimentoExistente = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
 		if(estabelecimentoExistente == null) {			
 			estabelecimentoRepository.save(estabelecimento);
 		}else {			
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+			throw new Exception("Usuário com email "+estabelecimento.getEmail()+" já existe!");
 		}
 	}
 	
