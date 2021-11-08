@@ -17,4 +17,6 @@ public interface EstabelecimentoService {
 	
 	public String redefinirSenha(Map<String, String> parametros);
 	
+	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento) throws Exception;
+	
 }

@@ -48,4 +48,9 @@ public class EstabelcimentoController {
 		Optional<Estabelecimento> estabelecimento = estabelecimentoService.buscarEstabelecimentoPeloId(id);
 		return new ResponseEntity(estabelecimento, HttpStatus.OK);
 	}
+	
+	@PutMapping("/atualizar-estabelecimento")
+	public ResponseEntity<Estabelecimento> atualizarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento) throws Exception{
+		return new ResponseEntity<>(estabelecimentoService.atualizarEstabelecimento(estabelecimento), HttpStatus.OK);
+	}
 }

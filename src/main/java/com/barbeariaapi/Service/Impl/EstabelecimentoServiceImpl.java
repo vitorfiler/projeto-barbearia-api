@@ -8,11 +8,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.barbeariaapi.Model.Estabelecimento;
 import com.barbeariaapi.Repository.EstabelecimentoRepository;
@@ -66,6 +64,16 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 			return "Senha alterada com sucesso!";
 		}else {
 			return "Falha ao alterar senha!";
+		}
+	}
+	
+	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento) throws Exception {
+		Estabelecimento estabelecimentoResponse = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
+		if(estabelecimentoResponse != null) {
+			estabelecimentoRepository.save(estabelecimentoResponse);
+			return estabelecimentoResponse;
+		}else {
+			throw new Exception("Usuário com email "+estabelecimento.getEmail()+" não foi encontrado!");
 		}
 	}
 	

@@ -10,10 +10,11 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity(name="Estabelecimento")
+@Entity(name="estabelecimento")
 public class Estabelecimento {
 	
 	@Column(name="hashSenha")
+	@Size(min = 3, max = 500)
 	private String hashSenha;
 	
 	@Column(name="nome")
@@ -45,6 +46,7 @@ public class Estabelecimento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	
 	public String getHashSenha() {
 		return hashSenha;
 	}
