@@ -9,4 +9,4 @@ CREATE TABLE Estabelecimento (
 );
 
 INSERT INTO Estabelecimento
-VALUES (1,'Vítor Nunes Macêdo', 'Barbearia do Vitim', 'vitinho@gmail.com', '16716716788', 'vitor');
+VALUES (1,'Vítor Nunes Macêdo', 'Barbearia do Vitim', 'xzburner', '16716716788', '1995');

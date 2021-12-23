@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @Entity(name="estabelecimento")
 public class Estabelecimento {
 	
-	@Column(name="hashSenha")
+	@Column(name="hash_senha")
 	@Size(min = 3, max = 500)
 	private String hashSenha;
 	
