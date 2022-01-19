@@ -1,4 +1,4 @@
-package com.barbeariaapi.Config;
+package com.barbeariaapi.config;
 
 
 import org.springframework.core.Ordered;
