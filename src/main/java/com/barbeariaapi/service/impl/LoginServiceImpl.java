@@ -1,4 +1,4 @@
-package com.barbeariaapi.Service.Impl;
+package com.barbeariaapi.service.impl;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.barbeariaapi.Model.Estabelecimento;
-import com.barbeariaapi.Repository.EstabelecimentoRepository;
-import com.barbeariaapi.Service.LoginService;
+import com.barbeariaapi.model.Estabelecimento;
+import com.barbeariaapi.repository.EstabelecimentoRepository;
+import com.barbeariaapi.service.LoginService;
 
 @Component("LoginController")
 public class LoginServiceImpl implements LoginService{

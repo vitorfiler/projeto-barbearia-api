@@ -1,4 +1,4 @@
-package com.barbeariaapi.Controller;
+package com.barbeariaapi.controller;
 
 import java.util.Date;
 import java.util.List;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.barbeariaapi.Model.Estabelecimento;
-import com.barbeariaapi.Model.Login;
-import com.barbeariaapi.Service.LoginService;
+import com.barbeariaapi.model.Estabelecimento;
+import com.barbeariaapi.model.Login;
+import com.barbeariaapi.service.LoginService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

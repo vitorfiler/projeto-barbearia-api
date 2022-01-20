@@ -1,11 +1,11 @@
-package com.barbeariaapi.Service;
+package com.barbeariaapi.service;
 
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.barbeariaapi.Model.Estabelecimento;
+import com.barbeariaapi.model.Estabelecimento;
 
 @Service
 public interface EstabelecimentoService {

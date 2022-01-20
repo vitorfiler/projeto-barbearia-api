@@ -1,4 +1,4 @@
-package com.barbeariaapi.Model;
+package com.barbeariaapi.model;
 
 public class Login {
 	

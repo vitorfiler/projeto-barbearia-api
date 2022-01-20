@@ -1,4 +1,4 @@
-package com.barbeariaapi.Service.Impl;
+package com.barbeariaapi.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
-import com.barbeariaapi.Model.Estabelecimento;
-import com.barbeariaapi.Repository.EstabelecimentoRepository;
-import com.barbeariaapi.Service.EstabelecimentoService;
+import com.barbeariaapi.model.Estabelecimento;
+import com.barbeariaapi.repository.EstabelecimentoRepository;
+import com.barbeariaapi.service.EstabelecimentoService;
 import com.barbeariaapi.utis.EmailUtils;
 
 import io.jsonwebtoken.Jwts;
