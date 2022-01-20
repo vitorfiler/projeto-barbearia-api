@@ -26,7 +26,7 @@ public class SolicitacaoController {
 		return solicitacaoService.criarSolicitacao(solicitacao);
 	}
 	
-	@GetMapping
+	@GetMapping("/todas")
 	public List<Solicitacao> getSolicitacoes(@RequestParam(name = "estabelecimento_id") Long estabelecimentoID){
 		return solicitacaoService.getSolicitacoes(estabelecimentoID);
 	}
