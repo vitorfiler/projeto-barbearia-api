@@ -1,9 +1,13 @@
 package com.barbeariaapi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barbeariaapi.dto.SolicitacaoDTO;
@@ -18,7 +22,12 @@ public class SolicitacaoController {
 	private SolicitacaoService solicitacaoService;
 	
 	@PostMapping
-	public SolicitacaoDTO getSolicitacoes(@RequestBody Solicitacao solicitacao) {
+	public SolicitacaoDTO criarSolicitacao(@RequestBody Solicitacao solicitacao) {
 		return solicitacaoService.criarSolicitacao(solicitacao);
+	}
+	
+	@GetMapping
+	public List<Solicitacao> getSolicitacoes(@RequestParam(name = "estabelecimento_id") Long estabelecimentoID){
+		return solicitacaoService.getSolicitacoes(estabelecimentoID);
 	}
 }

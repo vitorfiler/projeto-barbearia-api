@@ -1,5 +1,6 @@
 package com.barbeariaapi.service.impl;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 
 	@Autowired
 	private ObjectMapper objectMapper;
-	
+
 	public SolicitacaoDTO criarSolicitacao(Solicitacao solicitacao) {
 		if(solicitacao.getId() == null && solicitacao.getCdSolicitacao() == null) {			
 			solicitacao.setCdSolicitacao(gerarCodigoSolicitacao(solicitacao));
@@ -33,4 +34,8 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 		return cdSolicitacao;
 	}
 	
+	public List<Solicitacao> getSolicitacoes(Long estabelecimentoID){
+		List<Solicitacao> solicitacao = solicitacaoRepository.findAllByEstabelecimentoID(estabelecimentoID);
+		return solicitacao;
+	}
 }
