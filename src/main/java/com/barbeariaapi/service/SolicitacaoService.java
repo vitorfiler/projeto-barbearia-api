@@ -13,4 +13,6 @@ public interface SolicitacaoService {
 	public SolicitacaoDTO criarSolicitacao(Solicitacao solicitacao);
 	
 	public List<Solicitacao> getSolicitacoes(Long estabelecimentoID);
+	
+	public List<Solicitacao> filtrarSolicitacoes(Long estabelecimentoID, String filtro);
 }
