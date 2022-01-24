@@ -43,6 +43,10 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	
 	public List<Solicitacao> getSolicitacoes(Long estabelecimentoID){
 		List<Solicitacao> solicitacoes = solicitacaoRepository.findAllByEstabelecimentoID(estabelecimentoID);
+		solicitacoes.forEach(solicitacao->{
+			Optional<Cliente> cliente = clienteRepository.findById(solicitacao.getClienteID());
+			solicitacao.setCliente(cliente.get());
+		});
 		return solicitacoes;
 	}
 	
@@ -60,7 +64,7 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 			else if(solicitacao.getResponsavel().toLowerCase().contains(filtro.toLowerCase())) {
 				solicitacoesFiltradas.add(solicitacao);				
 			}
-			else if(cliente != null) {				
+			else if(cliente.isPresent()) {				
 				if(cliente.get().getNome().toLowerCase().contains(filtro.toLowerCase())) {
 					solicitacoesFiltradas.add(solicitacao);								
 				}

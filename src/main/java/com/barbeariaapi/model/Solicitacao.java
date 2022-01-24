@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.sun.istack.NotNull;
 
@@ -49,10 +50,9 @@ public class Solicitacao {
 	@NotNull
 	@Column(name="estabelecimento_ID")
 	private Long estabelecimentoID;
-//	
-//	@OneToOne
-//	@JoinColumn(name="clienteID", referencedColumnName="id")
-//	private Cliente cliente;
+
+	@Transient
+	private Cliente cliente;
 //	
 //	@OneToOne
 //	@JoinColumn(name="estabelecimentoID", referencedColumnName="id")
@@ -145,6 +145,14 @@ public class Solicitacao {
 
 	public void setCdSolicitacao(String cdSolicitacao) {
 		this.cdSolicitacao = cdSolicitacao;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Solicitacao() {
