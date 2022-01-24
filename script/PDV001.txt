@@ -1,0 +1,68 @@
+CREATE TABLE Endereco (
+	id INT AUTO_INCREMENT,
+	logradouro VARCHAR (200),
+	numero INT,
+	bairro VARCHAR(100),
+	complemento VARCHAR(100),
+	cidade VARCHAR(20),
+	estado VARCHAR(10),
+	cep VARCHAR(8),
+	PRIMARY KEY (id)	
+);
+
+CREATE TABLE Estabelecimento (
+	id INT,
+	hash_senha VARCHAR (500),
+	nome VARCHAR (100),
+	estabelecimento VARCHAR(100),
+	email VARCHAR(100),
+	CPF_CNPJ VARCHAR(18),
+	senha VARCHAR(100),
+	endereco_ID INT,
+	PRIMARY KEY (id),
+	FOREIGN KEY (endereco_ID) REFERENCES Endereco(id)
+);
+
+CREATE TABLE Cliente (
+	id INT AUTO_INCREMENT,
+	nome VARCHAR (100),
+	cpf VARCHAR(11),
+	dt_criacao Date,
+	telefone VARCHAR(20),
+	dt_nascimento Date,
+	ativo BIT,
+	endereco_ID INT,
+	PRIMARY KEY (id),
+    FOREIGN KEY (endereco_ID) REFERENCES Endereco(id)
+);
+
+CREATE TABLE solicitacao (
+	id INT auto_increment not NULL,
+	nome_servico VARCHAR(100),
+	tempo_estimado VARCHAR(100),
+	cd_solicitacao VARCHAR(100),
+	valor DOUBLE,
+	dt_atendimento DATE,
+	responsavel VARCHAR(500),
+	status ENUM('PENDENTE', 'ACEITO', 'RECUSADO'),
+	cliente_ID INT,
+	estabelecimento_ID INT,
+	PRIMARY KEY (id),
+	FOREIGN KEY (cliente_ID) REFERENCES Cliente(id),
+	FOREIGN KEY (estabelecimento_ID) REFERENCES Estabelecimento(id)
+);
+
+INSERT INTO easycutdb.endereco
+(logradouro, numero, bairro, complemento, cidade, estado, cep)
+VALUES("Estrada Dário Manoel Cardoso", "1206", "Ingleses do Rio Vermelho", "Bloco B ap 207", "Florianópolis", "SC", "88058400");
+
+INSERT INTO Estabelecimento
+VALUES (1, null , 'Vítor Nunes Macêdo', 'Barbearia do Vitim', 'zakumyjr@gmail.com', '16716716788', '1994', 1);
+
+INSERT INTO easycutdb.cliente
+(nome, cpf, dt_criacao, telefone, dt_nascimento, ativo, endereco_ID)
+VALUES("Vitor", "99999999999", "2022-01-19", "9999999999", "1999-07-10", 1, 1);
+
+INSERT INTO easycutdb.solicitacao
+(nome_servico, tempo_estimado, valor, dt_atendimento, responsavel, status, cliente_ID, estabelecimento_ID)
+VALUES("corte + barba", "50 min", 50.0, "2022-01-19", "Vítor Nunes", "PENDENTE", 1, 1);
