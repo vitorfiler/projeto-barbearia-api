@@ -1,0 +1,13 @@
+CREATE TABLE Servico (
+	id INT auto_increment not null,
+	categoria VARCHAR (30),
+	cd_Servico  VARCHAR (100),
+	descricao VARCHAR(200),
+	tempo_Estimado VARCHAR(20),
+	valor VARCHAR(20),
+	ativo BIT,
+	promocional BIT,
+	estabelecimento_ID INT,
+	PRIMARY KEY (id),
+	FOREIGN KEY (estabelecimento_ID) REFERENCES Estabelecimento(id)
+);
