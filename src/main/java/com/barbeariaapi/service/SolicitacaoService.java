@@ -15,4 +15,11 @@ public interface SolicitacaoService {
 	public List<Solicitacao> getSolicitacoes(Long estabelecimentoID);
 	
 	public List<Solicitacao> filtrarSolicitacoes(Long estabelecimentoID, String filtro);
+	
+	public Solicitacao alterarSolicitacao(Solicitacao solicitacao);
+	
+	public Solicitacao buscarPeloId(Long solicitacaoId);
+	
+	public void deletarPeloId(Long solicitacaoId);
+	
 }

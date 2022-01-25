@@ -43,11 +43,7 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	
 	public List<Solicitacao> getSolicitacoes(Long estabelecimentoID){
 		List<Solicitacao> solicitacoes = solicitacaoRepository.findAllByEstabelecimentoID(estabelecimentoID);
-		solicitacoes.forEach(solicitacao->{
-			Optional<Cliente> cliente = clienteRepository.findById(solicitacao.getClienteID());
-			solicitacao.setCliente(cliente.get());
-		});
-		return solicitacoes;
+		return adicionarClienteAoRetornoSolicitacoes(solicitacoes);
 	}
 	
 	public List<Solicitacao> filtrarSolicitacoes(Long estabelecimentoID, String filtro){
@@ -71,5 +67,54 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 			}
 		});
 		return solicitacoesFiltradas;
+	}
+	
+	public Solicitacao alterarSolicitacao(Solicitacao solicitacao) {
+		try {			
+			Optional<Solicitacao> resposta = solicitacaoRepository.findById(solicitacao.getId());
+			if(resposta.isPresent()) {
+				return solicitacaoRepository.save(solicitacao);
+			}else {
+				throw new IllegalArgumentException("Solicitação: "+ solicitacao.getCdSolicitacao() +", não encontrada no banco de dados");
+			}
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Falha ao alterar Solicitação "+ e);
+		}
+	}
+	
+	public Solicitacao buscarPeloId(Long solicitacaoId) {
+		try {
+			Optional<Solicitacao> solicitacao = solicitacaoRepository.findById(solicitacaoId);
+			if(solicitacao.isPresent()) {
+				Optional<Cliente> cliente = clienteRepository.findById(solicitacao.get().getClienteID());
+				solicitacao.get().setCliente(cliente.get());
+				return solicitacao.get();
+			}else {
+				throw new IllegalArgumentException("Solicitacao não encontrada");
+			}
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Falha ao buscar solicitação " +e);
+		}
+	}
+	
+	private List<Solicitacao> adicionarClienteAoRetornoSolicitacoes(List<Solicitacao> solicitacoes) {
+		solicitacoes.forEach(solicitacao->{
+			Optional<Cliente> cliente = clienteRepository.findById(solicitacao.getClienteID());
+			solicitacao.setCliente(cliente.get());
+		});
+		return solicitacoes;
+	}
+	
+	public void deletarPeloId(Long solicitacaoId) {
+		try {
+			Optional<Solicitacao> solicitacao = solicitacaoRepository.findById(solicitacaoId);
+			if(solicitacao.isPresent()) {				
+				solicitacaoRepository.deleteById(solicitacaoId);
+			}else {
+				throw new IllegalArgumentException("Solicitacao não encontrada");
+			}
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Falha ao deletar Solicitacao "+e);
+		}
 	}
 }
