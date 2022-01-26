@@ -11,43 +11,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barbeariaapi.model.Servico;
-import com.barbeariaapi.service.ServiceModelo;
+import com.barbeariaapi.service.ModeloService;
 
 @RestController
 @RequestMapping("/endpont")
 public class ModeloController {
 
 	@Autowired
-	ServiceModelo serviceModelo;
+	ModeloService modeloService;
 	
 	@GetMapping("/todos")
 	public List<Servico> buscarTodos(Long estabelecimentoId){
-		return serviceModelo.buscarTodos(estabelecimentoId);
+		return modeloService.buscarTodos(estabelecimentoId);
 	}
 	
 	@GetMapping
 	public Servico buscarPeloId(Long estabelecimentoID, Long servicoId){
-		return serviceModelo.buscarPeloId(estabelecimentoID, servicoId);
+		return modeloService.buscarPeloId(estabelecimentoID, servicoId);
 	}
 	
 	@PostMapping
 	public Servico cadastrar(Servico servico){
-		return serviceModelo.cadastrar(servico);
+		return modeloService.cadastrar(servico);
 	}
 	
 	@PutMapping
 	public Servico alterar(Servico servico){
-		return serviceModelo.alterar(servico);
+		return modeloService.alterar(servico);
 	}
 	
 	@DeleteMapping
 	public void deletarPeloId(Long id){
-		serviceModelo.deletarPeloId(id);
+		modeloService.deletarPeloId(id);
 	}
 	
 	@GetMapping("/filtro")
 	public List<Servico> filtrar(){
-		return serviceModelo.filtrar();
+		return modeloService.filtrar();
 	}
 	
 }

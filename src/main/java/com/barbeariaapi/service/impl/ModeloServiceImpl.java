@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.barbeariaapi.model.Servico;
-import com.barbeariaapi.service.ServiceModelo;
+import com.barbeariaapi.service.ModeloService;
 
 @Component("ModeloController")
-public class ServiceModeloImpl implements ServiceModelo{
+public class ModeloServiceImpl implements ModeloService{
 
 	public List<Servico> buscarTodos(Long estabelecimentoId){
 		return null;
