@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.barbeariaapi.model.Servico;
 
 @Service
-public interface ServiceModelo {
+public interface ModeloService {
 
 	public List<Servico> buscarTodos(Long estabelecimentoId);
 	
