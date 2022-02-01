@@ -39,6 +39,8 @@ public class LoginController {
 		user.setEstabelecimento(estabelecimento.getEstabelecimento());
 		user.setEmail(estabelecimento.getEmail());
 		user.setNomeProprietario(estabelecimento.getNomeProprietario());
+		user.setEstabelecimento_ID(estabelecimento.getId());
+		user.setCadastroCompleto(estabelecimento.getCadastroCompleto());
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	

@@ -12,7 +12,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
+import com.barbeariaapi.model.Endereco;
 import com.barbeariaapi.model.Estabelecimento;
+import com.barbeariaapi.repository.EnderecoRepository;
 import com.barbeariaapi.repository.EstabelecimentoRepository;
 import com.barbeariaapi.service.EstabelecimentoService;
 import com.barbeariaapi.utis.EmailUtils;
@@ -25,6 +27,9 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 
 	@Autowired
 	EstabelecimentoRepository estabelecimentoRepository;
+	
+	@Autowired
+	EnderecoRepository enderecoRepository;
 	
 	public void cadastrarEstabelecimento(Estabelecimento estabelecimento) throws Exception {
 		Estabelecimento estabelecimentoExistente = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
@@ -70,8 +75,12 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento) throws Exception {
 		Estabelecimento estabelecimentoResponse = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
 		if(estabelecimentoResponse != null) {
-			estabelecimentoRepository.save(estabelecimentoResponse);
-			return estabelecimentoResponse;
+			estabelecimentoRepository.save(estabelecimento);
+			Optional<Endereco> endereco = enderecoRepository.findById(estabelecimento.getEnderecoID());
+			if(endereco != null) {
+				estabelecimento.setEndereco(endereco.get());
+			}
+			return estabelecimento;
 		}else {
 			throw new Exception("Usuário com email "+estabelecimento.getEmail()+" não foi encontrado!");
 		}
