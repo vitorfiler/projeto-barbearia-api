@@ -14,7 +14,7 @@ public interface SolicitacaoService {
 	
 	public List<Solicitacao> getSolicitacoes(Long estabelecimentoID);
 	
-	public List<Solicitacao> filtrarSolicitacoes(Long estabelecimentoID, String filtro);
+	public List<Solicitacao> filtrarSolicitacoes(Long estabelecimentoID, String filtro, String status, String dtInicial, String dtFinal);
 	
 	public Solicitacao alterarSolicitacao(Solicitacao solicitacao);
 	
