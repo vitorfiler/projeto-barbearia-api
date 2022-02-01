@@ -26,30 +26,30 @@ public class EstabelcimentoController {
 	@Autowired
 	EstabelecimentoService estabelecimentoService;
 	
-	@PostMapping("/cadastrar")
+	@PostMapping
 	public ResponseEntity<Estabelecimento> cadastrarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento) throws Exception{
 		estabelecimentoService.cadastrarEstabelecimento(estabelecimento);
 		return new ResponseEntity<>(estabelecimento, HttpStatus.OK);
 	}
 	
-	@PutMapping("/redefinir-senha")
+	@PutMapping("/redefinicao")
 	public ResponseEntity<String> redefinirSenha(@RequestBody Map<String, String> parametros){
 		String status = estabelecimentoService.redefinirSenha(parametros);
 		return new ResponseEntity<>(status, HttpStatus.OK);
 	}
 	
-	@GetMapping("/recuperar-senha")
+	@GetMapping("/recuperacao")
 	public ResponseEntity<Map<String, String>> recuperarSenha(@RequestParam(name = "email") String email){
 		return new ResponseEntity<>(estabelecimentoService.recuperarSenha(email), HttpStatus.OK);
 	}
 	
-	@GetMapping("/buscar")
+	@GetMapping
 	public ResponseEntity<Estabelecimento> buscarEstabelecimento(@RequestParam(name = "id") Long id){
 		Optional<Estabelecimento> estabelecimento = estabelecimentoService.buscarEstabelecimentoPeloId(id);
 		return new ResponseEntity(estabelecimento, HttpStatus.OK);
 	}
 	
-	@PutMapping("/atualizar-estabelecimento")
+	@PutMapping
 	public ResponseEntity<Estabelecimento> atualizarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento) throws Exception{
 		return new ResponseEntity<>(estabelecimentoService.atualizarEstabelecimento(estabelecimento), HttpStatus.OK);
 	}

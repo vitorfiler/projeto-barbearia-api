@@ -1,0 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
+ALTER TABLE `Estabelecimento` MODIFY COLUMN `id` INT auto_increment;
+
+SET FOREIGN_KEY_CHECKS = 1;
