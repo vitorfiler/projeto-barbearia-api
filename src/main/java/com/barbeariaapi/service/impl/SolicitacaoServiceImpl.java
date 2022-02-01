@@ -1,6 +1,7 @@
 package com.barbeariaapi.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import com.barbeariaapi.model.Solicitacao;
 import com.barbeariaapi.repository.ClienteRepository;
 import com.barbeariaapi.repository.SolicitacaoRepository;
 import com.barbeariaapi.service.SolicitacaoService;
+import com.barbeariaapi.utis.DateUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component("SolicitacoesController")
@@ -31,6 +33,7 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	public SolicitacaoDTO criarSolicitacao(Solicitacao solicitacao) {
 		if(solicitacao.getId() == null && solicitacao.getCdSolicitacao() == null) {			
 			solicitacao.setCdSolicitacao(gerarCodigoSolicitacao(solicitacao));
+			solicitacao.setDtAtendimento(new Date());
 			solicitacaoRepository.save(solicitacao);
 		}
 		return objectMapper.convertValue(solicitacaoRepository.save(solicitacao), SolicitacaoDTO.class);
@@ -46,11 +49,24 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 		return adicionarClienteAoRetornoSolicitacoes(solicitacoes);
 	}
 	
-	public List<Solicitacao> filtrarSolicitacoes(Long estabelecimentoID, String filtro){
-		List<Solicitacao> solicitacoes = getSolicitacoes(estabelecimentoID);
-		if(filtro.isEmpty()) {
+	public List<Solicitacao> filtrarSolicitacoes(Long estabelecimentoID, String filtro, String status, String dtInicial, String dtFinal){
+		List<Solicitacao> solicitacoes = new ArrayList<>();
+		if(status.isEmpty()) {
 			return solicitacoes;
+		}else if(!dtInicial.isEmpty() && !dtFinal.isEmpty()) {
+			DateUtils.validarDuasDatas(dtInicial, dtFinal);
 		}
+		
+		if(status != "TODOS" && !dtInicial.isEmpty() && !dtFinal.isEmpty()){			
+			solicitacoes = solicitacaoRepository.findAllFiltro(estabelecimentoID, dtInicial, dtFinal, status);
+		}
+		else if(status == "TODOS" || !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
+			solicitacoes = solicitacaoRepository.findAllByDtAtendimento(estabelecimentoID, dtInicial, dtFinal);
+		}
+		else if(dtInicial.isEmpty() && dtFinal.isEmpty() && status == "TODOS") {
+			solicitacoes = solicitacaoRepository.findAllByEstabelecimentoID(estabelecimentoID);			
+		}
+		
 		List<Solicitacao> solicitacoesFiltradas = new ArrayList<>();
 		solicitacoes.forEach(solicitacao->{
 			Optional<Cliente> cliente = clienteRepository.findById(solicitacao.getClienteID());
@@ -63,8 +79,12 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 			else if(cliente.isPresent()) {				
 				if(cliente.get().getNome().toLowerCase().contains(filtro.toLowerCase())) {
 					solicitacoesFiltradas.add(solicitacao);								
+				}else if(cliente.get().getCpf().toLowerCase().contains(filtro.toLowerCase())) {
+					solicitacoesFiltradas.add(solicitacao);								
 				}
 			}
+			solicitacao.setCliente(cliente.get());
+			solicitacoesFiltradas.forEach(s->s.setCliente(cliente.get()));
 		});
 		return solicitacoesFiltradas;
 	}
@@ -117,4 +137,5 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 			throw new IllegalArgumentException("Falha ao deletar Solicitacao "+e);
 		}
 	}
+	
 }

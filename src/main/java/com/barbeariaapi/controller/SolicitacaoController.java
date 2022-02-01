@@ -34,15 +34,14 @@ public class SolicitacaoController {
 	}
 	
 	@GetMapping("/filtro")
-//	@Query(value = "SELECT * FROM solicitacao WHERE estabelecimento_ID = :estabelecimentoID"
-//            + " AND (' ' = :status OR status = :status) "
-//            + " AND (' ' = :dt_atendimento OR dt_atendimento = :dt_atendimento)"
-//            + " AND ()' ' = :valor OR valor LIKE %:valor% ", nativeQuery = true)
 	public List<Solicitacao> filtraSolicitacoes(
-			@RequestParam(name = "estabelecimento_ID", required = false) Long estabelecimentoID, 
-			@RequestParam(name = "filtro", required = false) String filtro){
+			@RequestParam(name = "estabelecimento_ID", required = true) Long estabelecimentoID, 
+			@RequestParam(name = "filtro", required = true) String filtro,
+			@RequestParam(name = "status", required = true) String status,
+			@RequestParam(name = "dt_inicial", required = true) String dtInicial,
+			@RequestParam(name = "dt_final", required = true) String dtFinal){
 		
-		return solicitacaoService.filtrarSolicitacoes(estabelecimentoID, filtro);
+		return solicitacaoService.filtrarSolicitacoes(estabelecimentoID, filtro, status, dtInicial, dtFinal);
 	}
 	
 	@PutMapping
