@@ -30,6 +30,8 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	@Autowired
 	private ObjectMapper objectMapper;
 
+	private static final String TODOS = "TODOS";
+	
 	public SolicitacaoDTO criarSolicitacao(Solicitacao solicitacao) {
 		if(solicitacao.getId() == null && solicitacao.getCdSolicitacao() == null) {			
 			solicitacao.setCdSolicitacao(gerarCodigoSolicitacao(solicitacao));
@@ -57,13 +59,13 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 			DateUtils.validarDuasDatas(dtInicial, dtFinal);
 		}
 		
-		if(status != "TODOS" && !dtInicial.isEmpty() && !dtFinal.isEmpty()){			
+		if(!status.equals(TODOS) && !dtInicial.isEmpty() && !dtFinal.isEmpty()){			
 			solicitacoes = solicitacaoRepository.findAllFiltro(estabelecimentoID, dtInicial, dtFinal, status);
 		}
-		else if(status == "TODOS" || !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
+		else if(status.equals(TODOS) || !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
 			solicitacoes = solicitacaoRepository.findAllByDtAtendimento(estabelecimentoID, dtInicial, dtFinal);
 		}
-		else if(dtInicial.isEmpty() && dtFinal.isEmpty() && status == "TODOS") {
+		else if(dtInicial.isEmpty() && dtFinal.isEmpty() && status.equals(TODOS)) {
 			solicitacoes = solicitacaoRepository.findAllByEstabelecimentoID(estabelecimentoID);			
 		}
 		
