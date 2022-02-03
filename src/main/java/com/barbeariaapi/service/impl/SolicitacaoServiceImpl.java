@@ -95,7 +95,10 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 		try {			
 			Optional<Solicitacao> resposta = solicitacaoRepository.findById(solicitacao.getId());
 			if(resposta.isPresent()) {
-				return solicitacaoRepository.save(solicitacao);
+				Optional<Cliente> cliente = clienteRepository.findById(solicitacao.getClienteID());
+				solicitacaoRepository.save(solicitacao);
+				solicitacao.setCliente(cliente.get());
+				return solicitacao;
 			}else {
 				throw new IllegalArgumentException("Solicitação: "+ solicitacao.getCdSolicitacao() +", não encontrada no banco de dados");
 			}

@@ -62,7 +62,7 @@ public class LoginController {
 				.signWith(SignatureAlgorithm.HS512,
 						secretKey.getBytes()).compact();
 
-		return "Bearer " + token;
+		return token;
 	}
 	
 	

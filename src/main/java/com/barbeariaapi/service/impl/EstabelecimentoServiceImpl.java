@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.barbeariaapi.model.Endereco;
 import com.barbeariaapi.model.Estabelecimento;
@@ -31,7 +32,7 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	@Autowired
 	EnderecoRepository enderecoRepository;
 	
-	public void cadastrarEstabelecimento(Estabelecimento estabelecimento) throws Exception {
+	public void cadastrarEstabelecimento(@RequestBody Estabelecimento estabelecimento) throws Exception {
 		Estabelecimento estabelecimentoExistente = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
 		if(estabelecimentoExistente == null) {			
 			estabelecimentoRepository.save(estabelecimento);
