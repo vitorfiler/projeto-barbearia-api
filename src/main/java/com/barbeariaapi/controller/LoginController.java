@@ -1,6 +1,7 @@
 package com.barbeariaapi.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,9 +34,10 @@ public class LoginController {
 		String nomeUsuario = parametros.get("username");
 		String senha = parametros.get("password");
 		Estabelecimento estabelecimento = loginService.loadUserByUsername(nomeUsuario, senha);
-		String token = getJWTToken(parametros.get("username"));
+		Map<String, String> tokens = getJWTToken(parametros.get("username"));
 		Login user = new Login();
-		user.setToken(token);		
+		user.setToken(tokens.get("token"));
+		user.setRefreshToken(tokens.get("refreshToken"));
 		user.setEstabelecimento(estabelecimento.getEstabelecimento());
 		user.setEmail(estabelecimento.getEmail());
 		user.setNomeProprietario(estabelecimento.getNomeProprietario());
@@ -44,7 +46,7 @@ public class LoginController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
-	private String getJWTToken(String username) {
+	private Map<String, String> getJWTToken(String username) {
 		String secretKey = "mySecretKey";
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
 				.commaSeparatedStringToAuthorityList("ROLE_USER");
@@ -61,8 +63,25 @@ public class LoginController {
 				.setExpiration(new Date(System.currentTimeMillis() + 1200000))
 				.signWith(SignatureAlgorithm.HS512,
 						secretKey.getBytes()).compact();
-
-		return token;
+		
+		String refreshToken = Jwts
+				.builder()
+				.setId("softtekJWT")
+				.setSubject(username)
+				.claim("authorities",
+						grantedAuthorities.stream()
+								.map(GrantedAuthority::getAuthority)
+								.collect(Collectors.toList()))
+				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + 36000000))
+				.signWith(SignatureAlgorithm.HS512,
+						secretKey.getBytes()).compact();
+		
+		Map<String, String> tokens = new HashMap<>();
+		tokens.put("token", token);
+		tokens.put("refreshToken", refreshToken);
+	    
+		return tokens;
 	}
 	
 	

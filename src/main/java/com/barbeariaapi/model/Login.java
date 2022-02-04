@@ -4,10 +4,11 @@ public class Login {
 	
 	private Long estabelecimento_ID;
 	private String estabelecimento;
+	private Boolean cadastroCompleto;
 	private String email;
 	private String nomeProprietario;
 	private String token;
-	private Boolean cadastroCompleto;
+	private String refreshToken;
 	
 	public Long getEstabelecimento_ID() {
 		return estabelecimento_ID;
@@ -45,6 +46,13 @@ public class Login {
 	}
 	public void setCadastroCompleto(Boolean cadastroCompleto) {
 		this.cadastroCompleto = cadastroCompleto;
+	}
+	
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
 	public Login() {
 		super();
