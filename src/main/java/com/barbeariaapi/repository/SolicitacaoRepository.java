@@ -26,4 +26,11 @@ public interface SolicitacaoRepository extends JpaRepository <Solicitacao, Long>
 			  nativeQuery = true)
 	List<Solicitacao> findAllByDtAtendimento(Long estabelecimentoID, String dtIncial, String dtFinal);
 	
+	@Query(
+			value = "SELECT * FROM solicitacao "
+					+ " WHERE estabelecimento_ID = ?1"
+					+ " and status = ?2", 
+			  nativeQuery = true)
+	List<Solicitacao> findAllByStatus(Long estabelecimentoID, String status);
+	
 }

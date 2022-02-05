@@ -55,18 +55,18 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 		List<Solicitacao> solicitacoes = new ArrayList<>();
 		if(status.isEmpty()) {
 			return solicitacoes;
-		}else if(!dtInicial.isEmpty() && !dtFinal.isEmpty()) {
-			DateUtils.validarDuasDatas(dtInicial, dtFinal);
 		}
 		
 		if(!status.equals(TODOS) && !dtInicial.isEmpty() && !dtFinal.isEmpty()){			
 			solicitacoes = solicitacaoRepository.findAllFiltro(estabelecimentoID, dtInicial, dtFinal, status);
 		}
-		else if(status.equals(TODOS) || !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
+		else if(status.equals(TODOS) && !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
 			solicitacoes = solicitacaoRepository.findAllByDtAtendimento(estabelecimentoID, dtInicial, dtFinal);
 		}
 		else if(dtInicial.isEmpty() && dtFinal.isEmpty() && status.equals(TODOS)) {
 			solicitacoes = solicitacaoRepository.findAllByEstabelecimentoID(estabelecimentoID);			
+		}else {			
+			solicitacoes = solicitacaoRepository.findAllByStatus(estabelecimentoID, status);			
 		}
 		
 		List<Solicitacao> solicitacoesFiltradas = new ArrayList<>();
