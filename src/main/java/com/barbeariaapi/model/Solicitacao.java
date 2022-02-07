@@ -29,7 +29,7 @@ public class Solicitacao {
 	private String nomeServico;
 	
 	@Column(name="tempo_estimado")
-	private String tempoEstimado;
+	private Long tempoEstimado;
 	
 	@Column(name="valor")
 	private Double valor;
@@ -74,11 +74,11 @@ public class Solicitacao {
 		this.nomeServico = nomeServico;
 	}
 
-	public String getTempoEstimado() {
+	public Long getTempoEstimado() {
 		return tempoEstimado;
 	}
 
-	public void setTempoEstimado(String tempoEstimado) {
+	public void setTempoEstimado(Long tempoEstimado) {
 		this.tempoEstimado = tempoEstimado;
 	}
 
