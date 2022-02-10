@@ -1,0 +1,46 @@
+-- heroku_cef4da67f7210b8.plano definition
+
+CREATE TABLE IF NOT exists `plano` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
+  `preco` varchar(100) DEFAULT NULL,
+  `ds_plano` enum('BASIC','PREMIUM','PRO') DEFAULT NULL,
+  `desconto` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- heroku_cef4da67f7210b8.beneficio definition
+
+CREATE TABLE IF NOT exists `beneficio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_beneficio` varchar(100) DEFAULT NULL,
+  `ds_beneficio` varchar(100) DEFAULT NULL,
+  `status` bit(1) DEFAULT NULL,
+  `dt_criacao` date DEFAULT NULL,
+  `dt_ultima_atualizacao` date DEFAULT NULL,
+  `plano_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `beneficio_ibfk_1` (`plano_id`),
+  CONSTRAINT `beneficio_ibfk_1` FOREIGN KEY (`plano_id`) REFERENCES `plano` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE heroku_cef4da67f7210b8.estabelecimento
+    ADD plano_ID INT,
+    ADD CONSTRAINT FOREIGN KEY(plano_ID) REFERENCES Plano(id);
+   
+INSERT INTO heroku_cef4da67f7210b8.plano
+(nome, preco, ds_plano, desconto)
+VALUES('Basic', 'Grátis', 'BASIC', NULL);
+   
+INSERT INTO heroku_cef4da67f7210b8.plano
+(nome, preco, ds_plano, desconto)
+VALUES('Premium', 'R$ 40,00', 'PREMIUM', NULL);
+
+INSERT INTO heroku_cef4da67f7210b8.plano
+(nome, preco, ds_plano, desconto)
+VALUES('Pro', 'R$ 100,00', 'PRO', NULL);
+
+INSERT INTO heroku_cef4da67f7210b8.beneficio
+(cod_beneficio, ds_beneficio, status, dt_criacao, dt_ultima_atualizacao, plano_id)
+VALUES(NULL, 'Lorem ipsum dolor', 0, '2022-02-09', '2022-02-09', 24);
+
