@@ -11,4 +11,6 @@ public interface PlanoService {
 
 	public List<Plano> buscarTodos();
 	
+	public void contratar(Long estabelecimentoID, Long planoID) throws Exception;
+	
 }

@@ -3,6 +3,7 @@ package com.barbeariaapi.model;
 public class Login {
 	
 	private Long estabelecimento_ID;
+	private Long plano_ID;
 	private String estabelecimento;
 	private Boolean cadastroCompleto;
 	private String email;
@@ -15,6 +16,12 @@ public class Login {
 	}
 	public void setEstabelecimento_ID(Long estabelecimento_ID) {
 		this.estabelecimento_ID = estabelecimento_ID;
+	}
+	public Long getPlano_ID() {
+		return plano_ID;
+	}
+	public void setPlano_ID(Long plano_ID) {
+		this.plano_ID = plano_ID;
 	}
 	public String getNomeProprietario() {
 		return nomeProprietario;
