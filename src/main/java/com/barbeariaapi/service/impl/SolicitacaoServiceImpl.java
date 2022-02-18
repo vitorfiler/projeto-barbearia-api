@@ -123,9 +123,14 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	}
 	
 	private List<Solicitacao> adicionarClienteAoRetornoSolicitacoes(List<Solicitacao> solicitacoes) {
+		if(solicitacoes == null) {
+			return solicitacoes;
+		}
 		solicitacoes.forEach(solicitacao->{
-			Optional<Cliente> cliente = clienteRepository.findById(solicitacao.getClienteID());
-			solicitacao.setCliente(cliente.get());
+			Optional<Cliente> cliente = clienteRepository.findById(solicitacao.getClienteID()!= null? solicitacao.getClienteID() : 0);
+			if(cliente.isPresent()) {				
+				solicitacao.setCliente(cliente.get());
+			}
 		});
 		return solicitacoes;
 	}
