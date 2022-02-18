@@ -1,5 +1,6 @@
 package com.barbeariaapi.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,7 +82,17 @@ public class ClienteServiceImpl implements ClienteService{
 		}
 	}
 	
-	public List<Cliente> filtrar(){
-		return null;
+	public List<Cliente> filtrar(String filtro){
+		List<Cliente> clientes = new ArrayList<>();
+		if(filtro.isEmpty()) {
+			return clientes;
+		}
+
+		try {
+			clientes = clienteRepository.findAllByFiltro(filtro);
+			return clientes;
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Falha ao filtrar clientes; ", e);
+		}
 	}
 }

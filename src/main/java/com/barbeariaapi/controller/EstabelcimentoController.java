@@ -1,5 +1,6 @@
 package com.barbeariaapi.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -52,5 +53,11 @@ public class EstabelcimentoController {
 	@PutMapping
 	public ResponseEntity<Estabelecimento> atualizarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento) throws Exception{
 		return new ResponseEntity<>(estabelecimentoService.atualizarEstabelecimento(estabelecimento), HttpStatus.OK);
+	}
+	
+	@PutMapping("/finaliza-cadastro")
+	public ResponseEntity<Estabelecimento> completarCadastroEstabelecimento(@Valid @RequestBody Map<String, String> params,
+			@RequestParam(name="estabelecimento_ID") Long estabelecimentoID) throws Exception{
+		return new ResponseEntity<>(estabelecimentoService.completarCadastroEstabelecimento(params, estabelecimentoID), HttpStatus.OK);
 	}
 }

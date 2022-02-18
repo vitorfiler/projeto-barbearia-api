@@ -1,5 +1,6 @@
 package com.barbeariaapi.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,5 +19,7 @@ public interface EstabelecimentoService {
 	public String redefinirSenha(Map<String, String> parametros);
 	
 	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento) throws Exception;
+	
+	public Estabelecimento completarCadastroEstabelecimento(Map<String, String> params, Long estabelecimentoID);
 	
 }

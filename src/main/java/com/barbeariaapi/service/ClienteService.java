@@ -21,5 +21,5 @@ public interface ClienteService {
 	
 	public void deletarPeloId(Long clienteID);
 	
-	public List<Cliente> filtrar();
+	public List<Cliente> filtrar(String filtro);
 }

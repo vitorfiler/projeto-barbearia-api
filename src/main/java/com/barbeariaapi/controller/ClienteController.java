@@ -55,8 +55,8 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/filtro")
-	public List<Cliente> filtrar(){
-		return clienteService.filtrar();
+	public List<Cliente> filtrar(@RequestParam(name="filtro") String filtro){
+		return clienteService.filtrar(filtro);
 	}
 	
 }

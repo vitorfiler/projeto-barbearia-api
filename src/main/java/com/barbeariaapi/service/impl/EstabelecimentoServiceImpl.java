@@ -17,6 +17,7 @@ import com.barbeariaapi.model.Endereco;
 import com.barbeariaapi.model.Estabelecimento;
 import com.barbeariaapi.repository.EnderecoRepository;
 import com.barbeariaapi.repository.EstabelecimentoRepository;
+import com.barbeariaapi.repository.PlanoRepository;
 import com.barbeariaapi.service.EstabelecimentoService;
 import com.barbeariaapi.utis.EmailUtils;
 
@@ -32,6 +33,9 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	@Autowired
 	EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	PlanoRepository planoRepository;
+	
 	public void cadastrarEstabelecimento(@RequestBody Estabelecimento estabelecimento) throws Exception {
 		Estabelecimento estabelecimentoExistente = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
 		if(estabelecimentoExistente == null) {			
@@ -42,7 +46,19 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	}
 	
 	public Optional<Estabelecimento> buscarEstabelecimentoPeloId(Long id) {
-		return estabelecimentoRepository.findById(id);
+		try {			
+			Optional<Estabelecimento> estabelecimento = estabelecimentoRepository.findById(id);
+			if(estabelecimento.isPresent()) {				
+				Optional<Endereco> endereco = enderecoRepository.findById(estabelecimento.get().getEnderecoID());
+				estabelecimento.get().setEndereco(endereco.get());
+//				Optional<Plano> plano = planoRepository.findById(estabelecimento.get().getPlanoID());
+//				estabelecimento.get().setPlano(plano.get());
+				
+			}
+			return estabelecimento;
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Falha ao buscar estabelecimento", e);
+		}		
 	}
 
 	
@@ -106,5 +122,26 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 						secretKey.getBytes()).compact();
 
 		return hash;
+	}
+	
+	public Estabelecimento completarCadastroEstabelecimento(Map<String, String> params, Long estabelecimentoID) {
+		try {
+			Optional<Estabelecimento> estabelecimento = estabelecimentoRepository.findById(estabelecimentoID);
+			Long enderecoID= Long.parseLong(params.get("enderecoID")); 
+			Boolean cadastroCompleto = Boolean.valueOf(params.get("cadastroCompleto")); 
+			if(estabelecimento.isPresent()) {
+				estabelecimento.get().setEnderecoID(enderecoID);
+				estabelecimento.get().setCadastroCompleto(cadastroCompleto);
+				
+				estabelecimentoRepository.save(estabelecimento.get());
+				Optional<Endereco> endereco = enderecoRepository.findById(enderecoID);
+				estabelecimento.get().setEndereco(endereco.get());
+//				Optional<Plano> plano = planoRepository.findById(estabelecimento.get().getPlanoID());
+//				estabelecimento.get().setPlano(plano.get());
+			}
+			return estabelecimento.get();
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Falha ao atualizar estabelecimento", e);
+		}
 	}
 }
