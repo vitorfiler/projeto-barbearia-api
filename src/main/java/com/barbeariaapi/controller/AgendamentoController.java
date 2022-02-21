@@ -49,7 +49,7 @@ public class AgendamentoController {
 		return agendamentoService.alterarAgendamento(agendamento);
 	}
 	
-	@GetMapping()
+	@GetMapping
 	public Agendamento buscarPeloId(@RequestParam(name="agendamento_ID", required= true) Long agendamentoId) {
 		return agendamentoService.buscarPeloId(agendamentoId);
 	}
