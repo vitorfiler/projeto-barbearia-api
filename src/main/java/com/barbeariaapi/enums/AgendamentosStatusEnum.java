@@ -1,6 +1,6 @@
 package com.barbeariaapi.enums;
 
-public enum SolicitacoesStatusEnum {
+public enum AgendamentosStatusEnum {
 	PENDENTE,
 	ACEITO,
 	RECUSADO;

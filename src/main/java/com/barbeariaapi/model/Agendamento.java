@@ -15,7 +15,7 @@ import com.sun.istack.NotNull;
 
 @Entity(name="Solicitacao")
 @Table
-public class Solicitacao {
+public class Agendamento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Solicitacao {
 	private Long id;
 	
 	@Column(name="cd_solicitacao")
-	private String cdSolicitacao;
+	private String cdAgendamento;
 	
 	@Column(name="nome_servico")
 	private String nomeServico;
@@ -139,12 +139,12 @@ public class Solicitacao {
 		this.estabelecimentoID = estabelecimentoID;
 	}
 
-	public String getCdSolicitacao() {
-		return cdSolicitacao;
+	public String getCdAgendamento() {
+		return cdAgendamento;
 	}
 
-	public void setCdSolicitacao(String cdSolicitacao) {
-		this.cdSolicitacao = cdSolicitacao;
+	public void setCdAgendamento(String cdAgendamento) {
+		this.cdAgendamento = cdAgendamento;
 	}
 
 	public Cliente getCliente() {
@@ -155,7 +155,7 @@ public class Solicitacao {
 		this.cliente = cliente;
 	}
 
-	public Solicitacao() {
+	public Agendamento() {
 		super();
 	}
 }

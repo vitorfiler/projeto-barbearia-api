@@ -2,7 +2,7 @@ package com.barbeariaapi.dto;
 
 import java.util.Date;
 
-public class SolicitacaoDTO {
+public class AgendamentoDTO {
 
 	private Long id;
 	private String nomeCliente;
