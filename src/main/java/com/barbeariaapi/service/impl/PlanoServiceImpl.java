@@ -32,5 +32,5 @@ public class PlanoServiceImpl implements PlanoService{
 			estabelecimentoService.atualizarEstabelecimento(estabelecimento.get());
 		}
 	}
-	
+
 }
