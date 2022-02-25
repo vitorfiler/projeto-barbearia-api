@@ -17,5 +17,5 @@ public class ReservasController {
 			@RequestParam(name="dt_inicial", required=false) String dt_inicial, @RequestParam(name="dt_final", required=false) String dt_final) {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
-	
+
 }
