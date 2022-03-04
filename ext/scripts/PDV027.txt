@@ -1,0 +1,18 @@
+CREATE TABLE if not exists Produto (
+	id INT auto_increment not null,
+	cod_produto VARCHAR (50),
+	nome_produto  VARCHAR (100),
+	ds_produto VARCHAR(300),
+	qtd_estoque INT,
+	valor VARCHAR(20),
+	valor_promocional VARCHAR(20),
+	ativo BIT,
+	promocional INT,
+	estabelecimento_ID INT,
+	PRIMARY KEY (id),
+	FOREIGN KEY (estabelecimento_ID) REFERENCES Estabelecimento(id)
+);
+
+INSERT INTO easycutdb.produto
+(cod_produto, nome_produto, ds_produto, qtd_estoque, valor, valor_promocional, ativo, promocional, estabelecimento_ID)
+VALUES('ac0c7b1b-007a-4ff1-ba92-e530b7c3c89d','Pomada Modeladora','Pomada modeladora com efeito de cabelo seco a melhor do mercado',15,'38','29.99',1,0,1);
