@@ -22,4 +22,7 @@ public interface AgendamentoService {
 	
 	public void deletarPeloId(Long agendamentoId);
 	
+
+	public List<Agendamento> agendamentosDoDia(Long estabelecimentoID);
+	
 }

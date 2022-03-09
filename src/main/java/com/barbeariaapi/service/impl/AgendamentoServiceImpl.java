@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.barbeariaapi.dto.AgendamentoDTO;
-import com.barbeariaapi.model.Cliente;
 import com.barbeariaapi.model.Agendamento;
-import com.barbeariaapi.repository.ClienteRepository;
+import com.barbeariaapi.model.Cliente;
 import com.barbeariaapi.repository.AgendamentoRepository;
+import com.barbeariaapi.repository.ClienteRepository;
 import com.barbeariaapi.service.AgendamentoService;
 import com.barbeariaapi.utis.DateUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -142,6 +142,15 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 			} else {
 				throw new IllegalArgumentException("Agendamento não encontrada");
 			}
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Falha ao deletar Agendamento " + e);
+		}
+	}
+	
+	public List<Agendamento> agendamentosDoDia(Long estabelecimentoID){
+		try {
+			String hoje = DateUtils.diaDeHoje();
+			return agendamentoRepository.findAllToday(hoje, estabelecimentoID);
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Falha ao deletar Agendamento " + e);
 		}

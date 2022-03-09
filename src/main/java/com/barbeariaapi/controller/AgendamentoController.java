@@ -58,4 +58,9 @@ public class AgendamentoController {
 	public void deletarPeloId(@RequestParam(name="agendamento_ID")Long agendamentoId) {
 		agendamentoService.deletarPeloId(agendamentoId);
 	}
+	
+	@GetMapping("/hoje")
+	public List<Agendamento> agendamentosDoDia(@RequestParam(name="estabelecimento_ID", required= true) Long estabelecimentoId) {
+		return agendamentoService.agendamentosDoDia(estabelecimentoId);
+	}
 }
