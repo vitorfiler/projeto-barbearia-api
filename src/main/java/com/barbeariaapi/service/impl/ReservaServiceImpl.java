@@ -2,6 +2,8 @@ package com.barbeariaapi.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,9 +90,9 @@ public class ReservaServiceImpl implements ReservaService{
 				reserva = new Reserva(reservaDTO);
 				reserva = reservaRepository.save(reserva);
 				
-//				produtosParaRetorno = alterarProdutoReserva(reservaDTO).stream()
-//						.map(r->produtoRepository.findById(r.getProdutoID()).get())
-//						.collect(Collectors.toList());
+				produtosParaRetorno = alterarProdutoReserva(reservaDTO).stream()
+						.map(r->produtoRepository.findById(r.getProdutoID()).get())
+						.collect(Collectors.toList());
 				reservaDTO = new ReservaDTO(reserva);
 				reservaDTO.setProdutos(produtosParaRetorno);
 				return reservaDTO;
@@ -128,4 +130,20 @@ public class ReservaServiceImpl implements ReservaService{
 		}
 	}
 
+	private List<ProdutoReserva> alterarProdutoReserva(ReservaDTO reserva) {
+		try {				
+			List<ProdutoReserva> reservas = produtoReservaRepository.findByReservaID(reserva.getId());
+			List<Produto> produtos = reserva.getProdutos();
+			reservas.forEach(r->{
+				r.setProdutoID(produtos.stream().mapToLong(p-> p.getId()).findFirst().orElseGet(null));
+				r.setQtd(produtos.stream().mapToInt(p-> p.getQtdEstoque()).findFirst().orElseGet(null));
+				produtoReservaRepository.save(r);
+				produtos.remove(produtos.stream().findFirst().get());
+			});
+			
+			return reservas;
+		} catch (Exception e) {
+			throw new BadRequestException("Falha ao criar Reserva", e);
+		}
+	}
 }
