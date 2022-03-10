@@ -5,20 +5,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.barbeariaapi.dto.ReservaDTO;
-import com.barbeariaapi.model.Reserva;
 
 @Service
 public interface ReservaService {
 
 	public List<ReservaDTO> buscarTodas(Long estabelecimentoId);
 	
-	public Reserva buscarPeloId(Long estabelecimentoID, Long servicoId);
+	public ReservaDTO buscarPeloId(Long estabelecimentoID, Long servicoId);
 	
-	public ReservaDTO cadastrar(ReservaDTO reserva);
+	public ReservaDTO cadastrar(ReservaDTO reservaDTO);
 	
-	public Reserva alterar(Reserva reserva);
+	public ReservaDTO alterar(ReservaDTO reservaDTO);
 	
 	public void deletarPeloId(Long reserva);
 	
-	public List<Reserva> filtrar();
+	public List<ReservaDTO> filtrar();
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,9 +35,20 @@ public class ReservaController {
 		return reservaService.buscarTodas(estabelecimentoID);
 	}
 	
+	@GetMapping
+	public ReservaDTO buscarPeloId(@RequestParam(name="estabelecimento_ID") Long estabelecimentoID,
+			@RequestParam(name="reserva_ID") Long reservaID) {
+		return reservaService.buscarPeloId(estabelecimentoID, reservaID);
+	}
+	
 	@PostMapping
 	public ReservaDTO criarReserva(@RequestBody ReservaDTO reserva) {
 		return reservaService.cadastrar(reserva);
+	}
+	
+	@PutMapping
+	public ReservaDTO alterarReserva(@RequestBody ReservaDTO reserva) {
+		return reservaService.alterar(reserva);
 	}
 
 }

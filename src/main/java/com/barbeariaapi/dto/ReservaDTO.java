@@ -135,7 +135,7 @@ public class ReservaDTO {
 		super();
 	}
 
-	public ReservaDTO(Reserva reserva, List<Produto> produtos) {
+	public ReservaDTO(Reserva reserva) {
 		super();
 		this.id = reserva.getId();
 		this.dtAbertura = reserva.getDtAbertura();
@@ -148,7 +148,6 @@ public class ReservaDTO {
 		this.solicitaCancelamento = reserva.getSolicitaCancelamento();
 		this.estabelecimentoID = reserva.getEstabelecimentoID();
 		this.clienteID = reserva.getClienteID();
-		this.produtos = produtos;
 	}
 
 	

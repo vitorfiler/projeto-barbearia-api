@@ -76,6 +76,15 @@ public class ProdutoReserva {
 		this.qtd = qtd;
 		this.estabelecimentoID = estabelecimentoID;
 	}
+	
+	public ProdutoReserva(Long id, Long reservaID, Long produtoID, Integer qtd, Long estabelecimentoID) {
+		super();
+		this.id = id;
+		this.reservaID = reservaID;
+		this.produtoID = produtoID;
+		this.qtd = qtd;
+		this.estabelecimentoID = estabelecimentoID;
+	}
 
 	
 }

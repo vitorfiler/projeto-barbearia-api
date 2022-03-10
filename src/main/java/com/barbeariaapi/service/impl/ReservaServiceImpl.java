@@ -32,23 +32,24 @@ public class ReservaServiceImpl implements ReservaService{
 	
 	public List<ReservaDTO> buscarTodas(Long estabelecimentoId){
 		try {
-			List<Produto> produtosParaRetorno =  
-					produtoReservaRepository.findAllByEstabelecimentoID(estabelecimentoId).stream()
-						.map(r->produtoRepository.findById(r.getProdutoID()).get())
-						.collect(Collectors.toList());
 			List<Reserva> reservas = reservaRepository.findAllByEstabelecimentoID(estabelecimentoId);
-			List<ReservaDTO> reservasDTO = reservas.stream()
-					.map(r-> new ReservaDTO(r, produtosParaRetorno))
-					.collect(Collectors.toList());
-			
+			List<ReservaDTO> reservasDTO = reservas.stream().map(r-> new ReservaDTO(r)).collect(Collectors.toList());
+			reservasDTO.forEach(reserva->reserva.setProdutos(produtoRepository.buscarProdutosDeUmaReserva(estabelecimentoId, reserva.getId())));
 			return reservasDTO;
 		} catch (Exception e) {
 			throw new BadRequestException("Falha ao buscar Reservas", e);
 		}
 	}
 	
-	public Reserva buscarPeloId(Long estabelecimentoID, Long reservaId) {
-		return null;
+	public ReservaDTO buscarPeloId(Long estabelecimentoID, Long reservaId) {
+		try {
+			Reserva reserva = reservaRepository.findById(reservaId).get();
+			ReservaDTO reservaDTO = new ReservaDTO(reserva);
+			reservaDTO.setProdutos(produtoRepository.buscarProdutosDeUmaReserva(estabelecimentoID, reserva.getId()));
+			return reservaDTO;
+		} catch (Exception e) {
+			throw new BadRequestException("Falha ao buscar Reserva", e);
+		}
 	}
 	
 	public ReservaDTO cadastrar(ReservaDTO reservaDTO) {
@@ -64,8 +65,9 @@ public class ReservaServiceImpl implements ReservaService{
 				produtosParaRetorno = criarProdutoReserva(reserva, produtosNaReserva).stream()
 						.map(r->produtoRepository.findById(r.getProdutoID()).get())
 						.collect(Collectors.toList());
-				
-				return new ReservaDTO(reserva, produtosParaRetorno);
+				reservaDTO = new ReservaDTO(reserva);
+				reservaDTO.setProdutos(produtosParaRetorno);
+				return reservaDTO;
 			}else {
 				throw new Exception();
 			}
@@ -73,12 +75,42 @@ public class ReservaServiceImpl implements ReservaService{
 			throw new BadRequestException("Falha ao cadastrar Reserva", e);
 		}
 	}
-
+	
+	@SuppressWarnings("unused")
+	public ReservaDTO alterar(ReservaDTO reservaDTO) {
+		try {
+			Reserva reserva = new Reserva(buscarPeloId(reservaDTO.getEstabelecimentoID(), reservaDTO.getId()));
+			if(reserva != null) {
+				List<Produto> produtosParaRetorno = new ArrayList<>();
+				List<Produto> produtosNaReserva = reservaDTO.getProdutos(); 
+				
+				reservaDTO.setCodReserva(reserva.getCodReserva());
+				reserva = new Reserva(reservaDTO);
+				reserva = reservaRepository.save(reserva);
+				
+//				produtosParaRetorno = alterarProdutoReserva(reservaDTO).stream()
+//						.map(r->produtoRepository.findById(r.getProdutoID()).get())
+//						.collect(Collectors.toList());
+				reservaDTO = new ReservaDTO(reserva);
+				reservaDTO.setProdutos(produtosParaRetorno);
+				return reservaDTO;
+			}
+			throw new BadRequestException("Reserva não encontrada");
+		} catch (Exception e) {
+			throw new BadRequestException("Falha ao cadastrar Reserva", e);
+		}
+	}
+	
+	public void deletarPeloId(Long reservaId) {
+		
+	}
+	
+	public List<ReservaDTO> filtrar(){
+		return null;
+	}
+	
 	private List<ProdutoReserva> criarProdutoReserva(Reserva reserva, List<Produto> produtosSolicitados) {
 		try {				
-//			List<Long> idProdutos = produtosSolicitados;
-			
-//					get(0).get("qtd");
 			List<ProdutoReserva> reservas = new ArrayList<>();
 			produtosSolicitados.forEach(produto->{
 				ProdutoReserva produtoReserva = new ProdutoReserva(
@@ -94,18 +126,6 @@ public class ReservaServiceImpl implements ReservaService{
 		} catch (Exception e) {
 			throw new BadRequestException("Falha ao criar Reserva", e);
 		}
-	}
-	
-	public Reserva alterar(Reserva reserva) {
-		return null;
-	}
-	
-	public void deletarPeloId(Long reservaId) {
-		
-	}
-	
-	public List<Reserva> filtrar(){
-		return null;
 	}
 
 }

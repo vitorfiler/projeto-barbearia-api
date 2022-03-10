@@ -150,7 +150,7 @@ public class Reserva {
 		this.codVendedor = reservaDTO.getCodVendedor();
 		this.statusReserva = reservaDTO.getStatusReserva();
 		this.valorTotalReserva = reservaDTO.getValorTotalReserva();
-		this.motivoCancelamento = reservaDTO.getMotivoCancelamento();
+		this.motivoCancelamento = reservaDTO.getMotivoCancelamento();	
 		this.codReserva = reservaDTO.getCodReserva();
 		this.solicitaCancelamento = reservaDTO.getSolicitaCancelamento();
 		this.estabelecimentoID = reservaDTO.getEstabelecimentoID();
