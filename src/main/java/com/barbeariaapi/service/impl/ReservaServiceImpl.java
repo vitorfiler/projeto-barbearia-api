@@ -3,7 +3,6 @@ package com.barbeariaapi.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,11 @@ import org.springframework.stereotype.Component;
 
 import com.barbeariaapi.dto.ReservaDTO;
 import com.barbeariaapi.exceptions.BadRequestException;
+import com.barbeariaapi.model.Cliente;
 import com.barbeariaapi.model.Produto;
 import com.barbeariaapi.model.ProdutoReserva;
 import com.barbeariaapi.model.Reserva;
+import com.barbeariaapi.repository.ClienteRepository;
 import com.barbeariaapi.repository.ProdutoRepository;
 import com.barbeariaapi.repository.ProdutoReservaRepository;
 import com.barbeariaapi.repository.ReservaRepository;
@@ -23,6 +24,8 @@ import com.barbeariaapi.utis.CdIdentificadorUtils;
 @Component
 public class ReservaServiceImpl implements ReservaService{
 
+	private static final String TODOS = "TODOS";
+	
 	@Autowired
 	ReservaRepository reservaRepository;
 	
@@ -31,6 +34,9 @@ public class ReservaServiceImpl implements ReservaService{
 	
 	@Autowired
 	ProdutoRepository produtoRepository;
+	
+	@Autowired
+	ClienteRepository clienteRepository;
 	
 	public List<ReservaDTO> buscarTodas(Long estabelecimentoId){
 		try {
@@ -107,8 +113,46 @@ public class ReservaServiceImpl implements ReservaService{
 		
 	}
 	
-	public List<ReservaDTO> filtrar(){
-		return null;
+	public List<ReservaDTO> filtrar(Long estabelecimentoID, String filtro, String status, String dtInicial,
+			String dtFinal){
+		List<Reserva> reservas = new ArrayList<>();
+		List<ReservaDTO> reservasDTO = new ArrayList<>();
+		List<ReservaDTO> reservasFiltradas = new ArrayList<>();
+		
+		if (status.isEmpty()) {
+			return reservasDTO;
+		}
+		else if (!status.equals(TODOS) && !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
+			reservas = reservaRepository.findAllFiltro(estabelecimentoID, dtInicial, dtFinal, status);
+		} else if (status.equals(TODOS) && !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
+			reservas = reservaRepository.findAllByDtAtendimento(estabelecimentoID, dtInicial, dtFinal);
+		} else if (dtInicial.isEmpty() && dtFinal.isEmpty() && status.equals(TODOS)) {
+			reservas = reservaRepository.findAllByEstabelecimentoID(estabelecimentoID);
+		} else {
+			reservas = reservaRepository.findAllByStatus(estabelecimentoID, status);
+		}
+		
+		reservasDTO = reservas.stream().map(r-> new ReservaDTO(r)).collect(Collectors.toList());
+		reservasDTO.forEach(r->{
+			r.setProdutos(produtoRepository.buscarProdutosDeUmaReserva(estabelecimentoID, r.getId()));
+		});
+		
+		reservasDTO.forEach(r->{
+			Optional<Cliente> cliente = clienteRepository.findById(r.getClienteID());
+			cliente.ifPresent(c-> r.setNomeCliente(c.getNome()));
+			
+			List<Produto> produtosFiltrados =  r.getProdutos().stream()
+				.filter(p-> p.getNomeProduto().toLowerCase().contains(filtro.toLowerCase()))
+				.collect(Collectors.toList());
+			
+			if(r.getNomeCliente().toLowerCase().contains(filtro.toLowerCase())) {
+				reservasFiltradas.add(r);
+			} 
+			else if(produtosFiltrados.size() > 0 ) {
+				reservasFiltradas.add(r);
+			}
+		});
+		return reservasFiltradas;
 	}
 	
 	private List<ProdutoReserva> criarProdutoReserva(Reserva reserva, List<Produto> produtosSolicitados) {

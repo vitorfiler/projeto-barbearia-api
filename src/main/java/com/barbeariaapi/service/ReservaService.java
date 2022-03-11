@@ -19,5 +19,6 @@ public interface ReservaService {
 	
 	public void deletarPeloId(Long reserva);
 	
-	public List<ReservaDTO> filtrar();
+	public List<ReservaDTO> filtrar(Long estabelecimentoID, String filtro, String status, String dtInicial,
+			String dtFinal);
 }

@@ -32,6 +32,8 @@ public class ReservaDTO {
 
 	private Long clienteID;
 	
+	private String nomeCliente;
+	
 	@Transient
 	private List<Produto> produtos;
 
@@ -121,6 +123,14 @@ public class ReservaDTO {
 
 	public void setClienteID(Long clienteID) {
 		this.clienteID = clienteID;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 
 	public List<Produto> getProdutos() {

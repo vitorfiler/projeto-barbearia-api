@@ -68,24 +68,24 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 			agendametos = agendamentoRepository.findAllByStatus(estabelecimentoID, status);
 		}
 
-		List<Agendamento> agendamentosFiltradas = new ArrayList<>();
+		List<Agendamento> agendamentosFiltrados = new ArrayList<>();
 		agendametos.forEach(agendamento -> {
 			Optional<Cliente> cliente = clienteRepository.findById(agendamento.getClienteID());
 			if (agendamento.getNomeServico().toLowerCase().contains(filtro.toLowerCase())) {
-				agendamentosFiltradas.add(agendamento);
+				agendamentosFiltrados.add(agendamento);
 			} else if (agendamento.getResponsavel().toLowerCase().contains(filtro.toLowerCase())) {
-				agendamentosFiltradas.add(agendamento);
+				agendamentosFiltrados.add(agendamento);
 			} else if (cliente.isPresent()) {
 				if (cliente.get().getNome().toLowerCase().contains(filtro.toLowerCase())) {
-					agendamentosFiltradas.add(agendamento);
+					agendamentosFiltrados.add(agendamento);
 				} else if (cliente.get().getCpf().toLowerCase().contains(filtro.toLowerCase())) {
-					agendamentosFiltradas.add(agendamento);
+					agendamentosFiltrados.add(agendamento);
 				}
 			}
 			agendamento.setCliente(cliente.get());
-			agendamentosFiltradas.forEach(s -> s.setCliente(cliente.get()));
+			agendamentosFiltrados.forEach(s -> s.setCliente(cliente.get()));
 		});
-		return agendamentosFiltradas;
+		return agendamentosFiltrados;
 	}
 
 	public Agendamento alterarAgendamento(Agendamento agendamento) {
