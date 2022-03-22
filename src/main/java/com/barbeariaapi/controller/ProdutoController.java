@@ -51,7 +51,10 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/filtro")
-	public List<Produto> filtrar(){
+	@ResponseStatus(HttpStatus.OK)
+	public List<Produto> filtrar(@RequestParam(name="estabelecimento_ID") Long estabelecimentoID,
+			@RequestParam(name="filtro") String filtroReserva,
+			@RequestParam(name="categoria") String categoria){
 		return produtoService.filtrar();
 	}
 	
