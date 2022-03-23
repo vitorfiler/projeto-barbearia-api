@@ -20,7 +20,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 	
 	public List<Produto> buscarTodos(Long estabelecimentoId) {
 		try {
-			return produtoRepository.findAllByEstabelecimentoID(estabelecimentoId);
+			return produtoRepository.findAllByAtivo(true, estabelecimentoId);
 		} catch (Exception e) {
 			throw new BadRequestException("Falha ao buscar Produtos", e);
 		}
