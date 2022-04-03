@@ -1,0 +1,32 @@
+ALTER TABLE servico
+	ADD codigo VARCHAR(100);
+
+ALTER TABLE servico
+ 	DROP COLUMN cd_Servico;
+  
+ 
+ALTER TABLE servico
+	ADD nome VARCHAR(100);
+
+ALTER TABLE servico
+	DROP COLUMN nome_servico;
+
+#########################################
+
+ALTER TABLE produto
+	ADD codigo VARCHAR(100);
+
+ALTER TABLE produto
+	DROP COLUMN cod_produto;
+  
+ALTER TABLE produto
+	ADD descricao VARCHAR(100);
+
+ALTER TABLE produto
+	DROP COLUMN ds_produto;
+	
+ALTER TABLE produto
+	ADD nome VARCHAR(100);
+
+ALTER TABLE produto
+	DROP COLUMN nome_produto;

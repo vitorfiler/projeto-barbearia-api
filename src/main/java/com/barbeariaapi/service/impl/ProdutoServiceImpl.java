@@ -42,8 +42,8 @@ public class ProdutoServiceImpl implements ProdutoService{
 
 	public Produto cadastrar(Produto produto) {
 		try {
-			if(produto.getId() == null && produto.getCodProduto() == null) {	
-				produto.setCodProduto(CdIdentificadorUtils.gerarCodigo());
+			if(produto.getId() == null && produto.getCodigo() == null) {	
+				produto.setCodigo(CdIdentificadorUtils.gerarCodigo());
 				return produtoRepository.save(produto);
 			}else {
 				throw new Exception();
@@ -57,7 +57,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 		try {			
 			Optional<Produto> resposta = produtoRepository.findById(produto.getId());
 			if(resposta.isPresent()) {
-				produto.setCodProduto(resposta.get().getCodProduto());
+				produto.setCodigo(resposta.get().getCodigo());
 				return produtoRepository.save(produto);
 			}else {
 				throw new Exception();

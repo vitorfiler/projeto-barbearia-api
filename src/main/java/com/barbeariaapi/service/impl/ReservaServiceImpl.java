@@ -142,7 +142,7 @@ public class ReservaServiceImpl implements ReservaService{
 			cliente.ifPresent(c-> r.setNomeCliente(c.getNome()));
 			
 			List<Produto> produtosFiltrados =  r.getProdutos().stream()
-				.filter(p-> p.getNomeProduto().toLowerCase().contains(filtro.toLowerCase()))
+				.filter(p-> p.getNome().toLowerCase().contains(filtro.toLowerCase()))
 				.collect(Collectors.toList());
 			
 			if(r.getNomeCliente().toLowerCase().contains(filtro.toLowerCase())) {

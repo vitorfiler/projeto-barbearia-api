@@ -41,8 +41,8 @@ public class ServicoServiceImpl implements ServicoService{
 	
 	public Servico cadastrarServico(Servico servico) {
 		try {
-			if(servico.getId() == null && servico.getCdServico() == null) {	
-				servico.setCdServico(gerarCodigoServico());
+			if(servico.getId() == null && servico.getCodigo() == null) {	
+				servico.setCodigo(null);
 				return servicoRepoitory.save(servico);
 			}else {
 				throw new IllegalArgumentException("Falha ao cadastrar Servico");
@@ -56,10 +56,10 @@ public class ServicoServiceImpl implements ServicoService{
 		try {			
 			Optional<Servico> resposta = servicoRepoitory.findById(servico.getId());
 			if(resposta.isPresent()) {
-				servico.setCdServico(resposta.get().getCdServico());
+				servico.setCodigo(resposta.get().getCodigo());
 				return servicoRepoitory.save(servico);
 			}else {
-				throw new IllegalArgumentException("Servico: "+ servico.getCdServico() +", não encontrado no banco de dados");
+				throw new IllegalArgumentException("Servico: "+ servico.getCodigo() +", não encontrado no banco de dados");
 			}
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Falha ao alterar servico "+ e);
