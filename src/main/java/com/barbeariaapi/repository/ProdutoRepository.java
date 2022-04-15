@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.barbeariaapi.model.Cliente;
 import com.barbeariaapi.model.Produto;
+import com.barbeariaapi.model.Servico;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository <Produto, Long> {
@@ -25,4 +26,8 @@ public interface ProdutoRepository extends JpaRepository <Produto, Long> {
 			+ " p.estabelecimento_ID = ?2 AND p.ativo = ?1", 
 			nativeQuery = true)
 	List<Produto> findAllByAtivo(Boolean ativo, Long estabelecimentoID);
+	
+	@Query(value = "select * from produto p where p.estabelecimento_ID = ?1 and p.promocional" , 
+			nativeQuery = true)
+	List<Produto> buscarProdutosPromocionais(Long id);
 }
