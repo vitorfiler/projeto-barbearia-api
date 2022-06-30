@@ -1,0 +1,5 @@
+ALTER TABLE servico
+ADD valor_promocional varchar(10);
+
+ALTER TABLE servico
+ADD nome_servico varchar(100);

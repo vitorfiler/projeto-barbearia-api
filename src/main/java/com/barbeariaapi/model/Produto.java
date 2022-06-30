@@ -15,14 +15,14 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="cod_produto")
-	private String codProduto;
+	@Column(name="codigo")
+	private String codigo;
 	
-	@Column(name="nome_produto")
-	private String nomeProduto;
+	@Column(name="nome")
+	private String nome;
 	
-	@Column(name="ds_produto")
-	private String dsProduto;
+	@Column(name="descricao")
+	private String descricao;
 	
 	@Column(name="qtd_estoque")
 	private Integer qtdEstoque;
@@ -51,28 +51,28 @@ public class Produto {
 		this.id = id;
 	}
 
-	public String getCodProduto() {
-		return codProduto;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setCodProduto(String codProduto) {
-		this.codProduto = codProduto;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
-	public String getNomeProduto() {
-		return nomeProduto;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDsProduto() {
-		return dsProduto;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDsProduto(String dsProduto) {
-		this.dsProduto = dsProduto;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Integer getQtdEstoque() {

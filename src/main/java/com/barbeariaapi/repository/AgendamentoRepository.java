@@ -33,4 +33,11 @@ public interface AgendamentoRepository extends JpaRepository <Agendamento, Long>
 			  nativeQuery = true)
 	List<Agendamento> findAllByStatus(Long estabelecimentoID, String status);
 	
+	
+	@Query(
+			value = "SELECT * FROM solicitacao "
+					+ " WHERE dt_atendimento LIKE %?1%"
+					+ " and estabelecimento_ID = ?2", 
+			  nativeQuery = true)
+	List<Agendamento> findAllToday(String hoje, Long estabelecimentoId);
 }

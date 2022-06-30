@@ -20,4 +20,17 @@ public class DateUtils {
 			return false;
 		}
 	}
+	
+	public static String diaDeHoje() {
+		LocalDateTime hoje = LocalDateTime.now();
+		String dia = "";
+		String mes = "";
+		if(hoje.getDayOfMonth() < 10) {
+			dia = "0" + hoje.getDayOfMonth();
+			if(hoje.getMonthValue() < 10) {
+				mes = "0" + hoje.getMonthValue();
+			}
+		}
+		return hoje.getYear()+ "-" + mes + "-" + dia;
+	}
 }

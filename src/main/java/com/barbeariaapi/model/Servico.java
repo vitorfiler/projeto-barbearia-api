@@ -15,20 +15,26 @@ public class Servico {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name="nome")
+	private String nome;
+	
 	@Column(name="categoria")
 	private String categoria;
 	
-	@Column(name="cd_Servico")
-	private String cdServico;
+	@Column(name="codigo")
+	private String codigo;
 	
 	@Column(name="descricao")
-	private String dsServico;
+	private String descricao;
 	
 	@Column(name="tempo_Estimado")
 	private String tempoEstimado;
 	
 	@Column(name="valor")
 	private String valor;
+	
+	@Column(name="valor_promocional")
+	private String valorPromocional;
 	
 	@Column(name="ativo")
 	private Boolean ativo;
@@ -48,6 +54,15 @@ public class Servico {
 		this.id = id;
 	}
 
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public String getCategoria() {
 		return categoria;
 	}
@@ -56,20 +71,20 @@ public class Servico {
 		this.categoria = categoria;
 	}
 
-	public String getCdServico() {
-		return cdServico;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setCdServico(String cdServico) {
-		this.cdServico = cdServico;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
-	public String getDsServico() {
-		return dsServico;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDsServico(String dsServico) {
-		this.dsServico = dsServico;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public String getTempoEstimado() {
@@ -86,6 +101,15 @@ public class Servico {
 
 	public void setValor(String valor) {
 		this.valor = valor;
+	}
+
+	
+	public String getValorPromocional() {
+		return valorPromocional;
+	}
+
+	public void setValorPromocional(String valorPromocional) {
+		this.valorPromocional = valorPromocional;
 	}
 
 	public Boolean getAtivo() {
