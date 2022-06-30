@@ -1,6 +1,5 @@
 package com.barbeariaapi.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.barbeariaapi.model.Estabelecimento;
 import com.barbeariaapi.service.EstabelecimentoService;
@@ -51,8 +51,13 @@ public class EstabelcimentoController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Estabelecimento> atualizarEstabelecimento(@Valid @RequestBody Estabelecimento estabelecimento) throws Exception{
-		return new ResponseEntity<>(estabelecimentoService.atualizarEstabelecimento(estabelecimento), HttpStatus.OK);
+	public ResponseEntity<Estabelecimento> atualizarEstabelecimento(@Valid @RequestParam(name="estabelecimento") Estabelecimento estabelecimento, @RequestParam(name="capa") MultipartFile capa) throws Exception{
+		return new ResponseEntity<>(estabelecimentoService.atualizarEstabelecimento(estabelecimento, capa), HttpStatus.OK);
+	}
+	
+	@PutMapping("/file")
+	public ResponseEntity<Estabelecimento> receberFile(@Valid @RequestParam(name="capa") MultipartFile capa) throws Exception{
+		return new ResponseEntity<>(estabelecimentoService.receberFile( capa), HttpStatus.OK);
 	}
 	
 	@PutMapping("/finaliza-cadastro")

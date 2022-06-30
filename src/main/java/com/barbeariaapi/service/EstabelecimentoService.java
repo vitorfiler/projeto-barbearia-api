@@ -1,10 +1,10 @@
 package com.barbeariaapi.service;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.barbeariaapi.model.Estabelecimento;
 
@@ -18,8 +18,10 @@ public interface EstabelecimentoService {
 	
 	public String redefinirSenha(Map<String, String> parametros);
 	
-	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento) throws Exception;
+	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento, MultipartFile capa) throws Exception;
 	
 	public Estabelecimento completarCadastroEstabelecimento(Map<String, String> params, Long estabelecimentoID);
+	
+	public Estabelecimento receberFile(MultipartFile capa) throws Exception;
 	
 }

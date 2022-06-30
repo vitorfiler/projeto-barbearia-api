@@ -1,5 +1,7 @@
 package com.barbeariaapi.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.barbeariaapi.model.Endereco;
 import com.barbeariaapi.model.Estabelecimento;
@@ -48,9 +51,11 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 	public Optional<Estabelecimento> buscarEstabelecimentoPeloId(Long id) {
 		try {			
 			Optional<Estabelecimento> estabelecimento = estabelecimentoRepository.findById(id);
-			if(estabelecimento.isPresent()) {				
-				Optional<Endereco> endereco = enderecoRepository.findById(estabelecimento.get().getEnderecoID());
-				estabelecimento.get().setEndereco(endereco.get());
+			if(estabelecimento.isPresent()) {
+				if(estabelecimento.get().getEnderecoID() != null) {					
+					Optional<Endereco> endereco = enderecoRepository.findById(estabelecimento.get().getEnderecoID());
+					estabelecimento.get().setEndereco(endereco.get());
+				}
 //				Optional<Plano> plano = planoRepository.findById(estabelecimento.get().getPlanoID());
 //				estabelecimento.get().setPlano(plano.get());
 				
@@ -89,9 +94,16 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 		}
 	}
 	
-	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento) throws Exception {
+	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento, MultipartFile capa) throws Exception {
 		Estabelecimento estabelecimentoResponse = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
 		if(estabelecimentoResponse != null) {
+			File file = new File(capa.getOriginalFilename());
+			byte[] picInBytes = new byte[(int) file.length()];
+			FileInputStream fileInputStream = new FileInputStream(file);
+			fileInputStream.read(picInBytes);
+			fileInputStream.close();
+			estabelecimento.setImagemCapa(picInBytes);
+			
 			estabelecimentoRepository.save(estabelecimento);
 			Optional<Endereco> endereco = enderecoRepository.findById(estabelecimento.getEnderecoID());
 			if(endereco != null) {
@@ -101,6 +113,25 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 		}else {
 			throw new Exception("Usuário com email "+estabelecimento.getEmail()+" não foi encontrado!");
 		}
+	}
+	
+	public Estabelecimento receberFile(MultipartFile capa) throws Exception {
+			Estabelecimento estabelecimento = new Estabelecimento(2, "", "Vítor Nunes Macêdo", "Barbearia do Vitim","teste",
+					"11111111111","teste",false,1,1);
+//			File file = new File(capa.getOriginalFilename());
+			byte[] picInBytes = new byte[(int) capa.getSize()];
+			FileInputStream fileInputStream = new FileInputStream(capa.getOriginalFilename());
+			fileInputStream.read(picInBytes);
+			fileInputStream.close();
+			estabelecimento.setImagemCapa(picInBytes);
+			
+			estabelecimentoRepository.save(estabelecimento);
+			Optional<Endereco> endereco = enderecoRepository.findById(estabelecimento.getEnderecoID());
+			if(endereco != null) {
+				estabelecimento.setEndereco(endereco.get());
+			}
+			return estabelecimento;
+
 	}
 	
 	private String gerarHashRecuperacao(String username) {

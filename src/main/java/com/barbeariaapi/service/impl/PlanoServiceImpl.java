@@ -29,7 +29,7 @@ public class PlanoServiceImpl implements PlanoService{
 		Optional<Estabelecimento> estabelecimento = estabelecimentoService.buscarEstabelecimentoPeloId(estabelecimentoID);
 		if(estabelecimento.get()!=null) {
 			estabelecimento.get().setPlanoID(planoID);
-			estabelecimentoService.atualizarEstabelecimento(estabelecimento.get());
+			estabelecimentoService.atualizarEstabelecimento(estabelecimento.get(), null);
 		}
 	}
 
