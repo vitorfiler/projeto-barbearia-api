@@ -11,14 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity(name="estabelecimento")
@@ -86,6 +80,108 @@ public class Estabelecimento {
 	
 	@Transient
 	private Plano plano;
+	
+	public Boolean getCadastroCompleto() {
+		return cadastroCompleto;
+	}
+
+	public void setCadastroCompleto(Boolean cadastroCompleto) {
+		this.cadastroCompleto = cadastroCompleto;
+	}
+
+	public String getHashSenha() {
+		return hashSenha;
+	}
+
+	public void setHashSenha(String hashSenha) {
+		this.hashSenha = hashSenha;
+	}
+
+	public String getNomeProprietario() {
+		return nomeProprietario;
+	}
+
+	public void setNomeProprietario(String nome) {
+		this.nomeProprietario = nome;
+	}
+
+	public String getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecimento(String estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpf_cnpj() {
+		return cpf_cnpj;
+	}
+
+	public void setCpf_cnpj(String cpf_cnpj) {
+		this.cpf_cnpj = cpf_cnpj;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public Long getEnderecoID() {
+		return enderecoID;
+	}
+
+	public void setEnderecoID(Long enderecoID) {
+		this.enderecoID = enderecoID;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public Long getPlanoID() {
+		return planoID;
+	}
+
+	public void setPlanoID(Long planoID) {
+		this.planoID = planoID;
+	}
+
+	public Plano getPlano() {
+		return plano;
+	}
+
+	public void setPlano(Plano plano) {
+		this.plano = plano;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	
+	public Estabelecimento() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 
 }
