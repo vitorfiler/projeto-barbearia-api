@@ -70,7 +70,7 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService{
 			parametros.put("status", "Email enviado com sucesso!");
 			parametros.put("hash", gerarHashRecuperacao(email));
 		}else {
-			parametros.put(email, "Email não encontrado no sistema!");
+			parametros.put("resposta", "o Email: " + email + " não encontrado no sistema!");
 		}
 		
 		return parametros;
