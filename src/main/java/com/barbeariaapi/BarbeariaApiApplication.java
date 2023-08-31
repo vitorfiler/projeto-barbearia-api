@@ -36,7 +36,7 @@ public class BarbeariaApiApplication {
 				
 				//Geanderson
 				.antMatchers(HttpMethod.POST, "/servicos").permitAll()
-				.antMatchers(HttpMethod.GET, "/servicos").permitAll()
+				.antMatchers(HttpMethod.GET, "/servicos/*").permitAll()
 				
 				//Bruno
 				.antMatchers(HttpMethod.POST, "/produtos").permitAll()
