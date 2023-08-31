@@ -28,7 +28,7 @@ public class AgendamentoController {
 		return agendamentoService.criarAgendamento(agendamento);
 	}
 	
-	@GetMapping("/todas")
+	@GetMapping("/todos")
 	public List<Agendamento> buscarAgendamentos(@RequestParam(name = "estabelecimento_ID") Long estabelecimentoID){
 		return agendamentoService.buscarAgendamentos(estabelecimentoID);
 	}

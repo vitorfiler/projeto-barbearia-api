@@ -28,8 +28,27 @@ public class BarbeariaApiApplication {
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
-				.antMatchers(HttpMethod.POST, "/estabelecimento").permitAll()
-				.antMatchers(HttpMethod.GET, "/estabelecimento/recuperar-senha").permitAll()
+				.antMatchers("*", "/estabelecimento/*").permitAll()
+				
+				//João Pedro
+				.antMatchers(HttpMethod.GET, "/planos").permitAll()
+				.antMatchers(HttpMethod.POST, "/planos").permitAll()
+				
+				//Geanderson
+				.antMatchers(HttpMethod.POST, "/servicos").permitAll()
+				.antMatchers(HttpMethod.GET, "/servicos").permitAll()
+				
+				//Bruno
+				.antMatchers(HttpMethod.POST, "/produtos").permitAll()
+				.antMatchers(HttpMethod.GET, "/produtos").permitAll()
+				
+				//Victor
+				.antMatchers(HttpMethod.POST, "/agendamentos").permitAll()
+				.antMatchers(HttpMethod.GET, "/agendamentos").permitAll()
+				
+
+				.antMatchers(HttpMethod.GET, "/promocoes").permitAll()
+				
 				.antMatchers(HttpMethod.GET, "/health-check").permitAll()
 				.anyRequest().authenticated();
 		}
