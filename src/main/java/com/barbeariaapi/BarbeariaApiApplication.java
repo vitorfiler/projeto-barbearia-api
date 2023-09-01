@@ -44,7 +44,7 @@ public class BarbeariaApiApplication {
 				
 				//Victor
 				.antMatchers(HttpMethod.POST, "/agendamentos").permitAll()
-				.antMatchers(HttpMethod.GET, "/agendamentos").permitAll()
+				.antMatchers(HttpMethod.GET, "/agendamentos/*").permitAll()
 				
 
 				.antMatchers(HttpMethod.GET, "/promocoes").permitAll()
