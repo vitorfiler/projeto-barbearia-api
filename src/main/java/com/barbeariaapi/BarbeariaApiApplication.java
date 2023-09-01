@@ -27,29 +27,12 @@ public class BarbeariaApiApplication {
 			http.csrf().disable()
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
-				.antMatchers("*", "/estabelecimento/*").permitAll()
 				
-				//João Pedro
-				.antMatchers(HttpMethod.GET, "/planos").permitAll()
-				.antMatchers(HttpMethod.POST, "/planos").permitAll()
+				.antMatchers(HttpMethod.GET, "/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/**").permitAll()
+				.antMatchers(HttpMethod.PUT, "/**").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/**").permitAll()
 				
-				//Geanderson
-				.antMatchers(HttpMethod.POST, "/servicos").permitAll()
-				.antMatchers(HttpMethod.GET, "/servicos/*").permitAll()
-				
-				//Bruno
-				.antMatchers(HttpMethod.POST, "/produtos").permitAll()
-				.antMatchers(HttpMethod.GET, "/produtos/*").permitAll()
-				
-				//Victor
-				.antMatchers(HttpMethod.POST, "/agendamentos").permitAll()
-				.antMatchers(HttpMethod.GET, "/agendamentos/*").permitAll()
-				
-
-				.antMatchers(HttpMethod.GET, "/promocoes").permitAll()
-				
-				.antMatchers(HttpMethod.GET, "/health-check").permitAll()
 				.anyRequest().authenticated();
 		}
 	}
