@@ -1,16 +1,36 @@
 package com.barbeariaapi.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.barbeariaapi.model.Estabelecimento;
 import com.barbeariaapi.model.Plano;
+import com.barbeariaapi.repository.PlanoRepository;
+import com.barbeariaapi.service.EstabelecimentoService;
+import com.barbeariaapi.service.PlanoService;
 
-@Service
-public interface PlanoService {
+@Component
+public class PlanoService {
 
-	public List<Plano> buscarTodos();
+	@Autowired
+	PlanoRepository planoRepository;
 	
-	public void contratar(Long estabelecimentoID, Long planoID) throws Exception;
+	@Autowired
+	EstabelecimentoService estabelecimentoService;
 	
+	public List<Plano> buscarTodos(){
+		return planoRepository.findAll();
+	}
+	
+	public void contratar(Long estabelecimentoID, Long planoID) throws Exception{
+		Optional<Estabelecimento> estabelecimento = estabelecimentoService.buscarEstabelecimentoPeloId(estabelecimentoID);
+		if(estabelecimento.get()!=null) {
+			estabelecimento.get().setPlanoID(planoID);
+			estabelecimentoService.atualizarEstabelecimento(estabelecimento.get());
+		}
+	}
+
 }

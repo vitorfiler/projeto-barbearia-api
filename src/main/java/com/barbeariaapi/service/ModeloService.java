@@ -2,22 +2,35 @@ package com.barbeariaapi.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.barbeariaapi.model.Servico;
+import com.barbeariaapi.service.ModeloService;
 
-@Service
-public interface ModeloService {
+@Component("ModeloController")
+public class ModeloService {
 
-	public List<Servico> buscarTodos(Long estabelecimentoId);
+	public List<Servico> buscarTodos(Long estabelecimentoId){
+		return null;
+	}
 	
-	public Servico buscarPeloId(Long estabelecimentoID, Long servicoId);
+	public Servico buscarPeloId(Long estabelecimentoID, Long servicoId) {
+		return null;
+	}
 	
-	public Servico cadastrar(Servico servico);
+	public Servico cadastrar(Servico servico) {
+		return null;
+	}
 	
-	public Servico alterar(Servico servico);
+	public Servico alterar(Servico servico) {
+		return null;
+	}
 	
-	public void deletarPeloId(Long servicoId);
+	public void deletarPeloId(Long servicoId) {
+		
+	}
 	
-	public List<Servico> filtrar();
+	public List<Servico> filtrar(){
+		return null;
+	}
 }
