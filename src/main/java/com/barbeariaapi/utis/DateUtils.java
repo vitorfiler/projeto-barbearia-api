@@ -23,13 +23,13 @@ public class DateUtils {
 	
 	public static String diaDeHoje() {
 		LocalDateTime hoje = LocalDateTime.now();
-		String dia = "";
-		String mes = "";
-		if(hoje.getDayOfMonth() < 10) {
+		String dia = String.valueOf(hoje.getDayOfMonth());
+		String mes = String.valueOf(hoje.getMonthValue());
+		if(Integer.valueOf(dia) < 10) {
 			dia = "0" + hoje.getDayOfMonth();
-			if(hoje.getMonthValue() < 10) {
-				mes = "0" + hoje.getMonthValue();
-			}
+		}
+		if(Integer.valueOf(mes) < 10) {
+			mes = "0" + hoje.getMonthValue();
 		}
 		return hoje.getYear()+ "-" + mes + "-" + dia;
 	}
