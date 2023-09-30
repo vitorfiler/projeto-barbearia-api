@@ -6,6 +6,7 @@ public class Login {
 	private Long plano_ID;
 	private String estabelecimento;
 	private Boolean cadastroCompleto;
+	private Boolean primeiroLogin;
 	private String email;
 	private String nomeProprietario;
 	private String token;
@@ -60,6 +61,12 @@ public class Login {
 	}
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
+	}
+	public Boolean getPrimeiroLogin() {
+		return primeiroLogin;
+	}
+	public void setPrimeiroLogin(Boolean primeiroLogin) {
+		this.primeiroLogin = primeiroLogin;
 	}
 	public Login() {
 		super();

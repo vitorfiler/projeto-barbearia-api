@@ -10,5 +10,5 @@ import com.barbeariaapi.model.Estabelecimento;
 @Service
 public interface LoginService {
 
-	public Estabelecimento loadUserByUsername(String username, String password) throws UsernameNotFoundException;
+	public Estabelecimento loadUserByUsername(String username, String password) throws UsernameNotFoundException, Exception;
 }

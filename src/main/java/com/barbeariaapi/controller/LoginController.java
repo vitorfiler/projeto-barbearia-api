@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class LoginController {
 	LoginService loginService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<Login> login(@RequestBody Map<String, String> parametros) {
+	public ResponseEntity<Login> login(@RequestBody Map<String, String> parametros) throws UsernameNotFoundException, Exception {
 		String nomeUsuario = parametros.get("username");
 		String senha = parametros.get("password");
 		Estabelecimento estabelecimento = loginService.loadUserByUsername(nomeUsuario, senha);
@@ -43,6 +44,7 @@ public class LoginController {
 		user.setNomeProprietario(estabelecimento.getNomeProprietario());
 		user.setEstabelecimento_ID(estabelecimento.getId());
 		user.setCadastroCompleto(estabelecimento.getCadastroCompleto());
+		user.setPrimeiroLogin(estabelecimento.getPrimeiroLogin());
 		user.setPlano_ID(estabelecimento.getPlanoID());
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}

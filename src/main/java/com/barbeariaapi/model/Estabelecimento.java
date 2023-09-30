@@ -9,8 +9,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity(name="estabelecimento")
 public class Estabelecimento {
 	
@@ -51,6 +49,9 @@ public class Estabelecimento {
 	@Column(name="cadastro_completo")
 	@NotNull
 	private Boolean cadastroCompleto;
+	
+	@Column(name="primeiro_login")
+	private Boolean primeiroLogin = true;
 
 	@Column(name="endereco_ID")
 	private Long enderecoID;
@@ -159,8 +160,15 @@ public class Estabelecimento {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
 	
+	public Boolean getPrimeiroLogin() {
+		return primeiroLogin;
+	}
+
+	public void setPrimeiroLogin(Boolean primeiroLogin) {
+		this.primeiroLogin = primeiroLogin;
+	}
+
 	public Estabelecimento() {
 		super();
 		// TODO Auto-generated constructor stub
