@@ -1,7 +1,6 @@
 package com.barbeariaapi.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,7 +34,6 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 	public AgendamentoDTO criarAgendamento(Agendamento agendamento) {
 		if (agendamento.getId() == null && agendamento.getCdAgendamento() == null) {
 			agendamento.setCdAgendamento(gerarCodigoAgendamento(agendamento));
-			agendamento.setDtAtendimento(new Date());
 			agendamentoRepository.save(agendamento);
 		}
 		return objectMapper.convertValue(agendamentoRepository.save(agendamento), AgendamentoDTO.class);

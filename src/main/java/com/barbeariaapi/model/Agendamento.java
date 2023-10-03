@@ -1,7 +1,5 @@
 package com.barbeariaapi.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +11,7 @@ import javax.persistence.Transient;
 import com.sun.istack.NotNull;
 
 
-@Entity(name="Solicitacao")
+@Entity(name="agendamento")
 @Table
 public class Agendamento {
 	
@@ -28,6 +26,9 @@ public class Agendamento {
 	@Column(name="nome_servico")
 	private String nomeServico;
 	
+	@Column(name="nome_cliente")
+	private String nomeCliente;
+	
 	@Column(name="tempo_estimado")
 	private Long tempoEstimado;
 	
@@ -35,7 +36,10 @@ public class Agendamento {
 	private Double valor;
 	
 	@Column(name="dt_atendimento")
-	private Date dtAtendimento;
+	private String dtAtendimento;
+	
+	@Column(name="hr_atendimento")
+	private String hrAtendimento;
 	
 	@Column(name="responsavel")
 	private String responsavel;
@@ -74,6 +78,14 @@ public class Agendamento {
 		this.nomeServico = nomeServico;
 	}
 
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
 	public Long getTempoEstimado() {
 		return tempoEstimado;
 	}
@@ -82,12 +94,20 @@ public class Agendamento {
 		this.tempoEstimado = tempoEstimado;
 	}
 
-	public Date getDtAtendimento() {
+	public String getDtAtendimento() {
 		return dtAtendimento;
 	}
 
-	public void setDtAtendimento(Date dtAtendimento) {
+	public void setDtAtendimento(String dtAtendimento) {
 		this.dtAtendimento = dtAtendimento;
+	}
+
+	public String getHrAtendimento() {
+		return hrAtendimento;
+	}
+
+	public void setHrAtendimento(String hrAtendimento) {
+		this.hrAtendimento = hrAtendimento;
 	}
 
 	public String getResponsavel() {

@@ -1,7 +1,5 @@
 package com.barbeariaapi.dto;
 
-import java.util.Date;
-
 public class AgendamentoDTO {
 
 	private Long id;
@@ -9,7 +7,8 @@ public class AgendamentoDTO {
 	private String nomeServico;
 	private String tempoEstimado;
 	private Double valor;
-	private Date dtAtendimento;
+	private String dtAtendimento;
+	private String hrAtendimento;
 	private String responsavel;
 	private String status;
 	
@@ -43,11 +42,17 @@ public class AgendamentoDTO {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public Date getDtAtendimento() {
+	public String getDtAtendimento() {
 		return dtAtendimento;
 	}
-	public void setDtAtendimento(Date dtAtendimento) {
+	public void setDtAtendimento(String dtAtendimento) {
 		this.dtAtendimento = dtAtendimento;
+	}
+	public String getHrAtendimento() {
+		return hrAtendimento;
+	}
+	public void setHrAtendimento(String hrAtendimento) {
+		this.hrAtendimento = hrAtendimento;
 	}
 	public String getResponsavel() {
 		return responsavel;
