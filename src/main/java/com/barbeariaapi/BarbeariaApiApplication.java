@@ -28,10 +28,9 @@ public class BarbeariaApiApplication {
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
 				
-				.antMatchers(HttpMethod.GET, "/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/**").permitAll()
-				.antMatchers(HttpMethod.PUT, "/**").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/estabelecimento/recuperacao").permitAll()
+				.antMatchers(HttpMethod.POST, "/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/estabelecimento").permitAll()
 				
 				.anyRequest().authenticated();
 		}
