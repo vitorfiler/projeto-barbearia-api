@@ -31,7 +31,10 @@ public class BarbeariaApiApplication {
 				.antMatchers(HttpMethod.GET, "/estabelecimento/recuperacao").permitAll()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 				.antMatchers(HttpMethod.POST, "/estabelecimento").permitAll()
-				.antMatchers(HttpMethod.POST, "/agendamentos").permitAll()
+				.antMatchers(HttpMethod.POST, "/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/**").permitAll()
+				.antMatchers(HttpMethod.PUT, "/**").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/**").permitAll()
 				
 				
 				.anyRequest().authenticated();
