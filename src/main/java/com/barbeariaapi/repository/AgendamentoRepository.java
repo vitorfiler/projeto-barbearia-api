@@ -9,7 +9,7 @@ import com.barbeariaapi.model.Agendamento;
 
 public interface AgendamentoRepository extends JpaRepository <Agendamento, Long> {
 
-	List<Agendamento> findAllByEstabelecimentoID(Long id);
+	List<Agendamento> findAllByEstabelecimentoIDOrderByDtAtendimentoDesc(Long id);
 	
 	@Query(
 			value = "SELECT * FROM Agendamento "

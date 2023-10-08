@@ -45,7 +45,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 	}
 
 	public List<Agendamento> buscarAgendamentos(Long estabelecimentoID) {
-		List<Agendamento> agendamentos = agendamentoRepository.findAllByEstabelecimentoID(estabelecimentoID);
+		List<Agendamento> agendamentos = agendamentoRepository.findAllByEstabelecimentoIDOrderByDtAtendimentoDesc(estabelecimentoID);
 		return adicionarClienteAoRetornoAgendamentos(agendamentos);
 	}
 
@@ -61,7 +61,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 		} else if (status.equals(TODOS) && !dtInicial.isEmpty() && !dtFinal.isEmpty()) {
 			agendametos = agendamentoRepository.findAllByDtAtendimento(estabelecimentoID, dtInicial, dtFinal);
 		} else if (dtInicial.isEmpty() && dtFinal.isEmpty() && status.equals(TODOS)) {
-			agendametos = agendamentoRepository.findAllByEstabelecimentoID(estabelecimentoID);
+			agendametos = agendamentoRepository.findAllByEstabelecimentoIDOrderByDtAtendimentoDesc(estabelecimentoID);
 		} else {
 			agendametos = agendamentoRepository.findAllByStatus(estabelecimentoID, status);
 		}
