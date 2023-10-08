@@ -12,7 +12,7 @@ public interface AgendamentoRepository extends JpaRepository <Agendamento, Long>
 	List<Agendamento> findAllByEstabelecimentoID(Long id);
 	
 	@Query(
-			value = "SELECT * FROM solicitacao "
+			value = "SELECT * FROM Agendamento "
 					+ " WHERE estabelecimento_ID = ?1"
 					+ " and dt_atendimento >= ?2 and dt_atendimento <= ?3 "
 					+ " and status LIKE ?4", 
@@ -20,14 +20,14 @@ public interface AgendamentoRepository extends JpaRepository <Agendamento, Long>
 	List<Agendamento> findAllFiltro(Long estabelecimentoID, String dtIncial, String dtFinal, String status);
 	
 	@Query(
-			value = "SELECT * FROM solicitacao "
+			value = "SELECT * FROM Agendamento "
 					+ " WHERE estabelecimento_ID = ?1"
 					+ " and dt_atendimento >= ?2 and dt_atendimento <= ?3 ", 
 			  nativeQuery = true)
 	List<Agendamento> findAllByDtAtendimento(Long estabelecimentoID, String dtIncial, String dtFinal);
 	
 	@Query(
-			value = "SELECT * FROM solicitacao "
+			value = "SELECT * FROM Agendamento "
 					+ " WHERE estabelecimento_ID = ?1"
 					+ " and status = ?2", 
 			  nativeQuery = true)
@@ -35,7 +35,7 @@ public interface AgendamentoRepository extends JpaRepository <Agendamento, Long>
 	
 	
 	@Query(
-			value = "SELECT * FROM solicitacao "
+			value = "SELECT * FROM Agendamento "
 					+ " WHERE dt_atendimento LIKE %?1%"
 					+ " and estabelecimento_ID = ?2", 
 			  nativeQuery = true)

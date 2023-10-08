@@ -150,14 +150,16 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 			String hoje = DateUtils.diaDeHoje();
 			List<Agendamento> agendamentosDia = agendamentoRepository.findAllToday(hoje, estabelecimentoID);
 			if(agendamentosDia != null) {
-				agendamentosDia.forEach(a->{					
-					Cliente cliente = clienteRepository.findById(a.getClienteID()).get();
-					a.setCliente(cliente);
+				agendamentosDia.forEach(a->{
+					if(a.getClienteID() != null) {						
+						Cliente cliente = clienteRepository.findById(a.getClienteID()).get();
+						a.setCliente(cliente);
+					}
 				});
 			}
 			return agendamentosDia;
 		} catch (Exception e) {
-			throw new IllegalArgumentException("Falha ao deletar Agendamento " + e);
+			throw new IllegalArgumentException("Falha ao listar Agendamentos " + e);
 		}
 	}
 
