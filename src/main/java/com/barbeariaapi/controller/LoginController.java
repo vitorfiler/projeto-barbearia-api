@@ -63,7 +63,7 @@ public class LoginController {
 								.map(GrantedAuthority::getAuthority)
 								.collect(Collectors.toList()))
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 720000))
+				.setExpiration(new Date(System.currentTimeMillis() + 14400000))
 				.signWith(SignatureAlgorithm.HS512,
 						secretKey.getBytes()).compact();
 		
@@ -76,7 +76,7 @@ public class LoginController {
 								.map(GrantedAuthority::getAuthority)
 								.collect(Collectors.toList()))
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 1440000))
+				.setExpiration(new Date(System.currentTimeMillis() + 21600000))
 				.signWith(SignatureAlgorithm.HS512,
 						secretKey.getBytes()).compact();
 		
