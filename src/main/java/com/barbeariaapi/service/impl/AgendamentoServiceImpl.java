@@ -90,9 +90,11 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 		try {
 			Optional<Agendamento> resposta = agendamentoRepository.findById(agendamento.getId());
 			if (resposta.isPresent()) {
-				Optional<Cliente> cliente = clienteRepository.findById(agendamento.getClienteID());
+				if(resposta.get().getCliente() != null) {					
+					Optional<Cliente> cliente = clienteRepository.findById(agendamento.getClienteID());
+					agendamento.setCliente(cliente.get());
+				}
 				agendamentoRepository.save(agendamento);
-				agendamento.setCliente(cliente.get());
 				return agendamento;
 			} else {
 				throw new IllegalArgumentException(
