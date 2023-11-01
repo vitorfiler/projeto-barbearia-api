@@ -32,4 +32,9 @@ public class PlanoController {
 		planoService.contratar(estabelecimentoID, planoID);
 	}
 	
+	@PostMapping ("/novo")
+	public Plano cadastrar(@RequestBody Plano plano) {
+		return planoService.criarPlano(plano);
+	}
+	
 }
