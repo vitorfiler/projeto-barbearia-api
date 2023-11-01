@@ -71,8 +71,7 @@ public class ProdutoServiceImpl implements ProdutoService{
 		try {
 			Optional<Produto> produto = produtoRepository.findById(produtoId);
 			if(produto.isPresent()) {
-				produto.get().setAtivo(false);
-				produtoRepository.save(produto.get());
+				produtoRepository.deleteById(produtoId);
 			}
 			else {
 				throw new Exception();
