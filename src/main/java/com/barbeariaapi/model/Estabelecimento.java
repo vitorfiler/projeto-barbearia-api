@@ -65,6 +65,12 @@ public class Estabelecimento {
 	@Transient
 	private Plano plano;
 	
+	private String telefone;
+	
+	private String celular;
+	
+	private String descricao;
+	
 	public Boolean getCadastroCompleto() {
 		return cadastroCompleto;
 	}
@@ -169,10 +175,32 @@ public class Estabelecimento {
 		this.primeiroLogin = primeiroLogin;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public Estabelecimento() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-
 }

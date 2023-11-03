@@ -88,7 +88,7 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 	}
 
 	public Estabelecimento atualizarEstabelecimento(Estabelecimento estabelecimento) throws Exception {
-		Estabelecimento estabelecimentoResponse = estabelecimentoRepository.findByEmail(estabelecimento.getEmail());
+		Estabelecimento estabelecimentoResponse = estabelecimentoRepository.findById(estabelecimento.getId()).get();
 		if (estabelecimentoResponse != null) {
 			estabelecimentoRepository.save(estabelecimento);
 			if(estabelecimento.getEnderecoID() != null) {
