@@ -1,13 +1,18 @@
 package com.barbeariaapi.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="estabelecimento")
 public class Estabelecimento {
@@ -69,7 +74,13 @@ public class Estabelecimento {
 	
 	private String celular;
 	
+	@Column(name="foto_s3_aws")
+	private String fotoS3Aws;
+	
 	private String descricao;
+	
+	@OneToMany(mappedBy="estabelecimento")
+    private Set<ArquivoEstabelecimento> arquivos;
 	
 	public Boolean getCadastroCompleto() {
 		return cadastroCompleto;
@@ -189,6 +200,23 @@ public class Estabelecimento {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	public String getFotoS3Aws() {
+		return fotoS3Aws;
+	}
+
+	public void setFotoS3Aws(String fotoS3Aws) {
+		this.fotoS3Aws = fotoS3Aws;
+	}
+
+	@JsonIgnore
+	public Set<ArquivoEstabelecimento> getArquivos() {
+		return arquivos;
+	}
+
+	public void setArquivos(Set<ArquivoEstabelecimento> arquivos) {
+		this.arquivos = arquivos;
 	}
 
 	public String getDescricao() {
