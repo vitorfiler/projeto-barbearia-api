@@ -1,14 +1,18 @@
 package com.barbeariaapi.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
-@Entity(name="Produto")
+@Entity(name="produto")
 public class Produto {
 	
 	@Id
@@ -43,6 +47,12 @@ public class Produto {
 	@Column(name="estabelecimento_ID")
 	private Long estabelecimentoID;
 
+	@OneToMany(mappedBy="produto")
+    private Set<ArquivoProduto> arquivos;
+	
+	@Column(name="foto_s3_aws")
+	private String fotoS3Aws;
+	
 	public Long getId() {
 		return id;
 	}
@@ -122,10 +132,26 @@ public class Produto {
 	public void setEstabelecimentoID(Long estabelecimentoID) {
 		this.estabelecimentoID = estabelecimentoID;
 	}
+	
+	@JsonIgnore
+	public Set<ArquivoProduto> getArquivos() {
+		return arquivos;
+	}
+
+	public void setArquivos(Set<ArquivoProduto> arquivos) {
+		this.arquivos = arquivos;
+	}
+
+	public String getFotoS3Aws() {
+		return fotoS3Aws;
+	}
+
+	public void setFotoS3Aws(String fotoS3Aws) {
+		this.fotoS3Aws = fotoS3Aws;
+	}
 
 	public Produto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 }

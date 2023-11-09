@@ -5,14 +5,14 @@ import org.springframework.stereotype.Component;
 
 import com.barbeariaapi.model.Promocao;
 import com.barbeariaapi.repository.ProdutoRepository;
-import com.barbeariaapi.repository.ServicoRepoitory;
+import com.barbeariaapi.repository.ServicoRepository;
 import com.barbeariaapi.service.PromocaoService;
 
 @Component
 public class PromocaoServiceImpl implements PromocaoService{
 
 	@Autowired
-	ServicoRepoitory servicoRepoitory;
+	ServicoRepository servicoRepoitory;
 	
 	@Autowired
 	ProdutoRepository produtoRepository;

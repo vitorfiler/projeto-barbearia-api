@@ -8,19 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.barbeariaapi.model.Servico;
-import com.barbeariaapi.repository.ServicoRepoitory;
+import com.barbeariaapi.repository.ServicoRepository;
 import com.barbeariaapi.service.ServicoService;
 
 @Component("ServicoController")
 public class ServicoServiceImpl implements ServicoService{
 
 	@Autowired
-	ServicoRepoitory servicoRepoitory;
+	ServicoRepository servicoRepository;
 	
 	
 	public List<Servico> buscarTodosServicos(Long estabelecimentoId){
 		try {
-			return servicoRepoitory.findAllByEstabelecimentoID(estabelecimentoId);
+			return servicoRepository.findAllByEstabelecimentoID(estabelecimentoId);
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Falha ao buscar Servicos", e);
 		}
@@ -28,7 +28,7 @@ public class ServicoServiceImpl implements ServicoService{
 	
 	public Servico buscarServicoPeloId(Long servicoId) {
 		try {
-			 Optional<Servico> servico = servicoRepoitory.findById(servicoId);
+			 Optional<Servico> servico = servicoRepository.findById(servicoId);
 			 if(servico.isPresent()) {
 				 return servico.get();
 			 }else {
@@ -43,7 +43,7 @@ public class ServicoServiceImpl implements ServicoService{
 		try {
 			if(servico.getId() == null && servico.getCodigo() == null) {	
 				servico.setCodigo(null);
-				return servicoRepoitory.save(servico);
+				return servicoRepository.save(servico);
 			}else {
 				throw new IllegalArgumentException("Falha ao cadastrar Servico");
 			}
@@ -54,10 +54,10 @@ public class ServicoServiceImpl implements ServicoService{
 	
 	public Servico alterarServico(Servico servico) {
 		try {			
-			Optional<Servico> resposta = servicoRepoitory.findById(servico.getId());
+			Optional<Servico> resposta = servicoRepository.findById(servico.getId());
 			if(resposta.isPresent()) {
 				servico.setCodigo(resposta.get().getCodigo());
-				return servicoRepoitory.save(servico);
+				return servicoRepository.save(servico);
 			}else {
 				throw new IllegalArgumentException("Servico: "+ servico.getCodigo() +", não encontrado no banco de dados");
 			}
@@ -68,9 +68,9 @@ public class ServicoServiceImpl implements ServicoService{
 	
 	public void deletarServicoPeloId(Long servicoId) {
 		try {
-			Optional<Servico> servico = servicoRepoitory.findById(servicoId);
+			Optional<Servico> servico = servicoRepository.findById(servicoId);
 			if(servico.isPresent()) {				
-				servicoRepoitory.deleteById(servicoId);
+				servicoRepository.deleteById(servicoId);
 			}else {
 				throw new IllegalArgumentException("Servico não encontrado");
 			}
@@ -81,7 +81,7 @@ public class ServicoServiceImpl implements ServicoService{
 	
 	public List<Servico> filtrarServicos(){
 		try {
-			return servicoRepoitory.findAll();
+			return servicoRepository.findAll();
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Falha ao buscar Servicos", e);
 		}
