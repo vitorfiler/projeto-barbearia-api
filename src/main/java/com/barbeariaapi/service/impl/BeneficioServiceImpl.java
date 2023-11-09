@@ -18,9 +18,9 @@ public class BeneficioServiceImpl implements BeneficioService {
 	BeneficioRepository beneficioRepository;
 	
 	
-	public Beneficio cadastrarBeneficio(Beneficio beneficio, Plano planoID) {
+	public Beneficio cadastrarBeneficio(Beneficio beneficio) {
 		try {
-			return beneficioRepository.save(beneficio, planoID);
+			return beneficioRepository.save(beneficio);
 		} catch (Exception e) {
 			throw new BadRequestException("Falha ao cadastrar benefício", e);
 			

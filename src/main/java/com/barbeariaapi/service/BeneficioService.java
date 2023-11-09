@@ -10,6 +10,6 @@ import java.util.List;
 @Service
 public interface BeneficioService {
 	
-	public Beneficio cadastrarBeneficio(Beneficio beneficio, Plano planoID);
+	public Beneficio cadastrarBeneficio(Beneficio beneficio);
 
 }

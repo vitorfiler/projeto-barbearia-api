@@ -19,8 +19,8 @@ public class BeneficioController {
 	BeneficioService beneficioService;
 	
 	@PostMapping ("/novo")
-	public Beneficio cadastrar(@RequestBody Beneficio beneficio, Plano planoID) {
-		return beneficioService.cadastrarBeneficio(beneficio, planoID);
+	public Beneficio cadastrar(@RequestBody Beneficio beneficio) {
+		return beneficioService.cadastrarBeneficio(beneficio);
 		
 	}
 
