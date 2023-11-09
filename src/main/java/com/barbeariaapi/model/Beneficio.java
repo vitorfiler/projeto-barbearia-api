@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="beneficio")
 public class Beneficio {
 
@@ -83,6 +85,15 @@ public class Beneficio {
 
 	public void setDtUltimaAtualizacao(Date dtUltimaAtualizacao) {
 		this.dtUltimaAtualizacao = dtUltimaAtualizacao;
+	}
+	
+	@JsonIgnore
+	public Plano getPlano() {
+		return plano;
+	}
+
+	public void setPlano(Plano plano) {
+		this.plano = plano;
 	}
 
 	public Beneficio() {
