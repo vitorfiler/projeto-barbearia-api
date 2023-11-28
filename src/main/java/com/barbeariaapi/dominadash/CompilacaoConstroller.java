@@ -77,7 +77,16 @@ public class CompilacaoConstroller {
 	@DeleteMapping
 	public void deletar(@RequestParam(name = "id") Long id) throws Exception {
 		try {
-			compilacaoRepository.deleteById(id);
+			Optional<Compilacao> comp = compilacaoRepository.findById(id);
+			if(comp.isPresent()) {				
+				comp.get().getParametros().forEach(f->{
+					Optional<ParametroCompilacao> param = paramCompilacaoRepository.findById(f.getId());
+					if(param.isPresent()) {
+						paramCompilacaoRepository.deleteById(param.get().getId());
+					}
+				});
+				compilacaoRepository.deleteById(id);
+			}
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
