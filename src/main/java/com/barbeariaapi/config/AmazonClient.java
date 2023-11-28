@@ -118,6 +118,7 @@ public class AmazonClient {
 			if (estabelecimento != null) {
 				estabelecimento.setFotoS3Aws(fileUrl);
 				arquivoEstabelecimentoRepository.save(arquivo);
+				estabelecimentoRepository.save(estabelecimento);
 			}
 		} catch (Exception e) {
 			throw new BadRequestException("Falha ao Adicionar imagem");

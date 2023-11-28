@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.barbeariaapi.exceptions.BadRequestException;
 import com.barbeariaapi.model.Estabelecimento;
 import com.barbeariaapi.model.Plano;
 import com.barbeariaapi.repository.PlanoRepository;
@@ -31,6 +32,15 @@ public class PlanoServiceImpl implements PlanoService{
 			estabelecimento.get().setPlanoID(planoID);
 			estabelecimentoService.atualizarEstabelecimento(estabelecimento.get());
 		}
+	}
+	
+	public Plano criarPlano(Plano plano) {
+		try {
+			return planoRepository.save(plano);
+		} catch (Exception e) {
+			throw new BadRequestException("Falha ao cadastrar plano "+ e);	
+		}
+	
 	}
 
 }
