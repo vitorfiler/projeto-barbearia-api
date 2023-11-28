@@ -7,22 +7,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-@Entity(name="compilacao")
+@Entity(name = "compilacao")
 public class Compilacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Long id;
-	
+
 	private String autor;
-	
+
 	private String status;
-	
+
 	private String funcao;
-	
-	private String parametros;
+
+//	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+//	@JoinColumn(name = "compilacao_id")
+//	private Set<ParametroCompilacao> parametros;
+//	
+	@OneToMany(mappedBy="compilacao")
+	private Set<ParametroCompilacao> parametros;
 
 	public Long getId() {
 		return id;
@@ -56,11 +62,11 @@ public class Compilacao {
 		this.funcao = funcao;
 	}
 
-	public String getParametros() {
+	public Set<ParametroCompilacao> getParametros() {
 		return parametros;
 	}
 
-	public void setParametros(String parametros) {
+	public void setParametros(Set<ParametroCompilacao> parametros) {
 		this.parametros = parametros;
 	}
 }
