@@ -16,6 +16,8 @@ public class ParametroCompilacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private Integer ordem;
+	
 	private String chave;
 	
 	private String valor;
@@ -25,6 +27,14 @@ public class ParametroCompilacao {
     @ManyToOne
     @JoinColumn(name="compilacao_id", nullable=false)
     private Compilacao compilacao;
+
+	public Integer getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
+	}
 
 	public String getChave() {
 		return chave;

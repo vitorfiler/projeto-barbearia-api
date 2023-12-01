@@ -68,6 +68,11 @@ public class CompilacaoConstroller {
 		List<Compilacao> compilacoes = new ArrayList<>();
 		try {
 			compilacoes = compilacaoRepository.findAll();
+			if(compilacoes != null) {
+				compilacoes.forEach(c->{
+					c.setParametros(paramCompilacaoRepository.buscarOrdenado(c.getId()));
+				});
+			}
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
