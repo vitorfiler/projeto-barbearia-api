@@ -10,6 +10,8 @@ import javax.persistence.Transient;
 
 import com.sun.istack.NotNull;
 
+import lombok.AllArgsConstructor;
+
 
 @Entity(name="agendamento")
 @Table
@@ -178,4 +180,39 @@ public class Agendamento {
 	public Agendamento() {
 		super();
 	}
+	
+	public Agendamento(Agendamento agendamento) {
+		this.id = agendamento.getId();
+		this.cdAgendamento = agendamento.getCdAgendamento();
+		this.nomeServico = agendamento.getNomeServico();
+		this.nomeCliente = agendamento.getNomeCliente();
+		this.tempoEstimado = agendamento.getTempoEstimado();
+		this.valor = agendamento.getValor();
+		this.dtAtendimento = agendamento.getDtAtendimento();
+		this.hrAtendimento = agendamento.getHrAtendimento();
+		this.responsavel = agendamento.getResponsavel();
+		this.status = agendamento.getStatus();
+		this.clienteID = agendamento.getClienteID();
+		this.estabelecimentoID = agendamento.getEstabelecimentoID();
+	}
+
+	public Agendamento(Long id, String cdAgendamento, String nomeServico, String nomeCliente, Long tempoEstimado,
+			Double valor, String dtAtendimento, String hrAtendimento, String responsavel, String status, Long clienteID,
+			Long estabelecimentoID) {
+		super();
+		this.id = id;
+		this.cdAgendamento = cdAgendamento;
+		this.nomeServico = nomeServico;
+		this.nomeCliente = nomeCliente;
+		this.tempoEstimado = tempoEstimado;
+		this.valor = valor;
+		this.dtAtendimento = dtAtendimento;
+		this.hrAtendimento = hrAtendimento;
+		this.responsavel = responsavel;
+		this.status = status;
+		this.clienteID = clienteID;
+		this.estabelecimentoID = estabelecimentoID;
+	}
+	
+	
 }

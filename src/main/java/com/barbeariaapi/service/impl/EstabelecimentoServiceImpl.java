@@ -124,7 +124,7 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 			Boolean cadastroCompleto = Boolean.valueOf(params.get("cadastroCompleto"));
 			if (estabelecimento.isPresent()) {
 				estabelecimento.get().setEnderecoID(enderecoID);
-				estabelecimento.get().setCadastroCompleto(cadastroCompleto);
+				estabelecimento.get().setCadastro_completo(cadastroCompleto);
 
 				estabelecimentoRepository.save(estabelecimento.get());
 				Optional<Endereco> endereco = enderecoRepository.findById(enderecoID);

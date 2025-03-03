@@ -52,8 +52,7 @@ public class Estabelecimento {
 	private String senha;
 	
 	@Column(name="cadastro_completo")
-	@NotNull
-	private Boolean cadastroCompleto;
+	private Boolean cadastro_completo;
 	
 	@Column(name="primeiro_login")
 	private Boolean primeiroLogin = true;
@@ -82,12 +81,12 @@ public class Estabelecimento {
 	@OneToMany(mappedBy="estabelecimento")
     private Set<ArquivoEstabelecimento> arquivos;
 	
-	public Boolean getCadastroCompleto() {
-		return cadastroCompleto;
+	public Boolean getCadastro_completo() {
+		return cadastro_completo;
 	}
 
-	public void setCadastroCompleto(Boolean cadastroCompleto) {
-		this.cadastroCompleto = cadastroCompleto;
+	public void setCadastro_completo(Boolean cadastroCompleto) {
+		this.cadastro_completo = cadastroCompleto;
 	}
 
 	public String getHashSenha() {
@@ -231,4 +230,55 @@ public class Estabelecimento {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public Estabelecimento(Long id, @Size(min = 3, max = 500) String hashSenha,
+			@Size(min = 3, max = 100) String nomeProprietario,
+			@Size(min = 3, max = 100) String estabelecimento, @Size(min = 3, max = 100) String email,
+			@Size(min = 3, max = 100) String cpf_cnpj, @Size(min = 3, max = 100) String senha,
+			Boolean cadastroCompleto, Boolean primeiroLogin, Long enderecoID, Long planoID, Endereco endereco,
+			Plano plano, String telefone, String celular, String fotoS3Aws, String descricao,
+			Set<ArquivoEstabelecimento> arquivos) {
+		super();
+		this.id = id;
+		this.hashSenha = hashSenha;
+		this.nomeProprietario = nomeProprietario;
+		this.estabelecimento = estabelecimento;
+		this.email = email;
+		this.cpf_cnpj = cpf_cnpj;
+		this.senha = senha;
+		this.cadastro_completo = cadastroCompleto;
+		this.primeiroLogin = primeiroLogin;
+		this.enderecoID = enderecoID;
+		this.planoID = planoID;
+		this.endereco = endereco;
+		this.plano = plano;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.fotoS3Aws = fotoS3Aws;
+		this.descricao = descricao;
+		this.arquivos = arquivos;
+	}
+	
+	public Estabelecimento(Estabelecimento estabelecimento) {
+		super();
+		this.id = estabelecimento.getId();
+		this.hashSenha = estabelecimento.getHashSenha();
+		this.nomeProprietario = estabelecimento.getNomeProprietario();
+		this.estabelecimento = estabelecimento.getEstabelecimento();
+		this.email = estabelecimento.getEmail();
+		this.cpf_cnpj = estabelecimento.getCpf_cnpj();
+		this.senha = estabelecimento.getSenha();
+		this.cadastro_completo = estabelecimento.getCadastro_completo();
+		this.primeiroLogin = estabelecimento.getPrimeiroLogin();
+		this.enderecoID = estabelecimento.getEnderecoID();
+		this.planoID = estabelecimento.getPlanoID();
+		this.endereco = estabelecimento.getEndereco();
+		this.plano = estabelecimento.getPlano();
+		this.telefone = estabelecimento.getTelefone();
+		this.celular = estabelecimento.getCelular();
+		this.fotoS3Aws = estabelecimento.getFotoS3Aws();
+		this.descricao = estabelecimento.getDescricao();
+		this.arquivos = estabelecimento.getArquivos();
+	}
+	
 }
