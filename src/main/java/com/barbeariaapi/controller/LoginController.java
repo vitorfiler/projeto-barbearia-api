@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.barbeariaapi.model.Estabelecimento;
 import com.barbeariaapi.model.Login;
 import com.barbeariaapi.service.LoginService;
+import com.barbeariaapi.tenant.DataSourceContextHolder;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -46,6 +47,7 @@ public class LoginController {
 		user.setCadastroCompleto(estabelecimento.getCadastro_completo());
 		user.setPrimeiroLogin(estabelecimento.getPrimeiroLogin());
 		user.setPlano_ID(estabelecimento.getPlanoID());
+		System.out.println("Banco selecionado: " + DataSourceContextHolder.get());
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
