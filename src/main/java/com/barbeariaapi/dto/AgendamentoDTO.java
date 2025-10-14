@@ -66,4 +66,35 @@ public class AgendamentoDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public AgendamentoDTO(Long id, String nomeCliente, String nomeServico, String tempoEstimado, Double valor,
+			String dtAtendimento, String hrAtendimento, String responsavel, String status) {
+		super();
+		this.id = id;
+		this.nomeCliente = nomeCliente;
+		this.nomeServico = nomeServico;
+		this.tempoEstimado = tempoEstimado;
+		this.valor = valor;
+		this.dtAtendimento = dtAtendimento;
+		this.hrAtendimento = hrAtendimento;
+		this.responsavel = responsavel;
+		this.status = status;
+	}
+	public AgendamentoDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public AgendamentoDTO(String nomeCliente, String nomeServico, String tempoEstimado, Double valor,
+			String dtAtendimento, String hrAtendimento, String responsavel, String status) {
+		super();
+		this.nomeCliente = nomeCliente;
+		this.nomeServico = nomeServico;
+		this.tempoEstimado = tempoEstimado;
+		this.valor = valor;
+		this.dtAtendimento = dtAtendimento;
+		this.hrAtendimento = hrAtendimento;
+		this.responsavel = responsavel;
+		this.status = status;
+	}
+	
 }

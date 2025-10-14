@@ -36,7 +36,7 @@ public interface AgendamentoRepository extends JpaRepository <Agendamento, Long>
 	
 	@Query(
 			value = "SELECT * FROM Agendamento "
-					+ " WHERE dt_atendimento LIKE %?1%"
+					+ " WHERE dt_atendimento LIKE ?1"
 					+ " and estabelecimento_ID = ?2", 
 			  nativeQuery = true)
 	List<Agendamento> findAllToday(String hoje, Long estabelecimentoId);

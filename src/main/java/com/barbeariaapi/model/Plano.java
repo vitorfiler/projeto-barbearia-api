@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name="plano")
 public class Plano {
 
@@ -30,6 +32,7 @@ public class Plano {
 	private String desconto;
 	
 	@OneToMany(mappedBy="plano")
+	@JsonManagedReference
     private Set<Beneficio> beneficios;
 	
 //	@Transient

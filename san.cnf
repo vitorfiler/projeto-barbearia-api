@@ -6,11 +6,11 @@ req_extensions     = req_ext
 distinguished_name = dn
 
 [dn]
-CN = 56.125.110.27
+CN = 18.229.116.28
 O = Domina Dev
 
 [req_ext]
 subjectAltName = @alt_names
 
 [alt_names]
-IP.1 = 56.125.110.27
+IP.1 = 18.229.116.28

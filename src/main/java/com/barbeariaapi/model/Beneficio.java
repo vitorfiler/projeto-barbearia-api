@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="beneficio")
@@ -37,6 +38,7 @@ public class Beneficio {
 
     @ManyToOne
     @JoinColumn(name="plano_id", nullable=false)
+    @JsonBackReference
     private Plano plano;
     
 	public Long getId() {
