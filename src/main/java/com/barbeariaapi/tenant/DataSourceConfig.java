@@ -30,8 +30,11 @@ public class DataSourceConfig {
     @Value("${spring.datasource.password}")
     private String dbPassword;
 
-    private static final String HOST = "easycut-db.c160s2yyouk6.sa-east-1.rds.amazonaws.com";
-    private static final String PORT = "3306";
+    @Value("${datasource.host}")
+    private String host;
+
+    @Value("${datasource.port}")
+    private String port;
 
     @Bean
     public DataSource primeDataSource() {
@@ -50,7 +53,7 @@ public class DataSourceConfig {
 
     private DataSource buildDataSource(String dbName) {
         return DataSourceBuilder.create()
-                .url("jdbc:mysql://" + HOST + ":" + PORT + "/" + dbName + "?useSSL=false&serverTimezone=UTC")
+                .url("jdbc:mysql://" + host + ":" + port + "/" + dbName + "?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true")
                 .username(dbUsername)
                 .password(dbPassword)
                 .driverClassName("com.mysql.cj.jdbc.Driver")
@@ -81,7 +84,7 @@ public class DataSourceConfig {
             EntityManagerFactoryBuilder builder) {
 
         Map<String, Object> jpaProps = new HashMap<>();
-        jpaProps.put("hibernate.hbm2ddl.auto", "update"); // já está no application.properties também
+        jpaProps.put("hibernate.hbm2ddl.auto", "update");
         jpaProps.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 
         return builder
